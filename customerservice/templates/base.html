@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang = "fa-IR" dir="rtl">
+    <head>
+    {% block title %}<title>مدیریت ارتباط با مشتری</title>{% endblock title %}
+    <meta charset = 'utf-8'>
+    <meta name = 'viewport' content = 'width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.rtl.min.css" integrity="sha384-OXTEbYDqaX2ZY/BOaZV/yFGChYHtrXH2nyXJ372n2Y8abBhrqacCEe+3qhSHtLjy" crossorigin="anonymous">
+     
+    
+    {% comment %}------------ django admin core css ------------ {% endcomment %}
+    {% comment %} <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+    <script src="/static/admin/js/core.js"></script> {% endcomment %}
+    {% comment %} --------------unknown--------------- {% endcomment %}
+    {% comment %} <script src='{% url 'js-catalog'%}'></script>  {% endcomment %}
+    {% comment %} --------------jquery cdn google for searchable dropdown--------------- {% endcomment %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js" integrity="sha512-5+FrEmSijjxRArJWeLcCIEgoQYAgU0gSa9MgNMN+tVSS+MPZsEk9a7OkPZr7AzjNJng1Kl+tXOQVtJcsU+Ax0w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+
+
+    <link rel = 'stylesheet' href = "{% static 'styles.css'%} ">
+    <link rel = 'stylesheet' media = 'screen and (max-width:678px)' href = "{% static 'mobile.css'%} ">
+
+
+
+    </head>
+    <body>
+         <nav id = 'navbar' class="bg-white">
+            
+                <img src = '/static/logo.jpg' width='160' length='70' href='www.afranet.ir'></img>
+                <a id = 'maintitle'>مدیریت ارتباط با مشتری</a>
+                <ul>
+                    
+                        {% if user.is_authenticated %}
+                    <li><a>کاربر: {{user.get_username}}</a></li>
+                    <li><a href = "{% url 'logout'  %}?next={{request.path}}">خروج</a></li>
+                        {% else %}
+                    <li><a href = "{% url 'login'  %}?next={{request.path}}">ورود</a></li>
+                        {% endif %} 
+                </ul>
+        </nav>  
+
+
+        <hr>
+        <div style = 'border: 9px solid red;
+        border-radius: 5px;' class = 'container-fluid'>
+            <div style = 'border: 9px solid blue;
+            border-radius: 5px;' class = 'row'>
+
+
+            <div style = 'border: 9px solid black;
+                border-radius: 5px;' class = 'col-sm-1'>
+                <div class="btn-group-vertical">
+                    <a href="{% url 'customerservice:index' %}" class="btn btn-primary">داشبورد</a>
+                    <a href="{% url 'customerservice:contracts-list' %}" class="btn btn-primary">قراردادها</a>
+                    <a href="{% url 'customerservice:customers-list' %}" class="btn btn-primary">مشترکین</a>
+                    <a href="{% url 'customerservice:agents-list' %}" class="btn btn-primary">نمایندگان</a>
+                    <a href="{% url 'customerservice:wirelesses-list' %}" class="btn btn-primary">سرویس وایرلس</a>
+                    
+                  </div>
+            </div>
+                {% comment %} <div style = 'border: 9px solid black;
+                border-radius: 5px;' class = 'col-sm-2'>
+                    <div style = 'border: 9px solid yellow;
+                    border-radius: 5px;' class= 'sidebar-nav'>
+                    <ul>
+                        <li><a href = '/admin/'>صفحه مدیریت</a></li>
+                        <li><a href = "{% url 'customerservice:index' %}">داشبورد</a></li>
+                        <li><a href = "{% url 'customerservice:contracts-list' %}">قراردادها</a></li>
+                        <li><a href = "{% url 'customerservice:customers-list' %}">مشترکین</a></li>
+                        <li><a href = "{% url 'customerservice:agent-list' %}">نمایندگان</a></li>
+                        <li><a href = "{% url 'customerservice:wireless-list' %}">سرویس وایرلس</a></li>
+                        {% comment %} {% if user.is_authenticated %}
+                        <li>کاربر: {{user.get_username}}</li>
+                        <li><a href = "{% url 'logout'  %}?next={{request.path}}">خروج</a></li>
+                        {% else %}
+                        <li><a href = "{% url 'login'  %}?next={{request.path}}">ورود</a></li>
+                        {% endif %} {% endcomment %}
+                    {% comment %} </ul>
+                    </div> 
+                </div>  {% endcomment %}
+                <div style = 'border: 9px solid green;
+                border-radius: 5px;' class = 'col-sm-1'>
+                </div>
+                <div class = 'col-sm-9'>
+                    {% block content %}{% endblock content %}
+                </div> 
+                <div style = 'border: 9px solid yellow;
+                border-radius: 5px;' class = 'col-sm-1'>
+                </div> 
+            </div>
+        </div> 
+
+
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    </body>
+</html>

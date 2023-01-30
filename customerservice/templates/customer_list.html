@@ -1,0 +1,92 @@
+{% extends 'new_base.html' %}
+{% block content %}
+        <br>
+        <button type = 'button' class="btn btn-success">
+            <a href = "{% url 'customerservice:customer-create' %}" >افزودن مشترک</a>
+        </button>
+
+        <br>
+        <br>
+        <form method='post' action='{% url 'customerservice:customers-search' %}'>
+            {% csrf_token %}
+            <input type='search' placeholder = 'جستجو' name = 'searched'>
+            
+            <input type="submit" value="جستجو">
+        </form>
+
+
+        <form method='post' action='{% url 'customerservice:customers-searchp' %}'>
+            {% csrf_token %}
+            <input type='search' placeholder = 'جستجو' name = 'searched'>
+            
+            <input type="submit" value="جستجو پی">
+        </form>
+
+
+        <form method='post' action='{% url 'customerservice:new-customers-search' %}'>
+            {% csrf_token %}
+            <input type='search' placeholder = 'جستجو' name = 'searched'>
+            
+            <input type="submit" value="جستجوی جدید">
+        </form>
+            
+        <h1>لیست مشترکین:</h1>
+
+        {%if customer_list%}
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                                <tr>
+                                    <th scope="col">نام تجاری</th>
+                                    <th scope="col">برند</th>   
+                                    <th scope="col">نوع</th>   
+                                    <th scope="col">شهر</th>   
+                                    <th scope="col">آدرس</th>   
+                                    <th scope="col">تلفن</th>   
+                                    <th scope="col">توضیحات</th>   
+                                </tr>
+                        </thead>
+                        <tbody>
+                                {% for x in customer_list%}
+                                    <tr>
+                                        <th scope="row"><a 
+                                            href = "{{x.get_absolute_url }}">
+                                            {{x.commercialname}}</a></th>
+                                        <td>{{x.brand}}</td>    
+                                        <td>{{x.kind}}</td>    
+                                        <td>{{x.city}}</td>    
+                                        <td>{{x.address}}</td>    
+                                        <td>{{x.phone}}</td>    
+                                        <td>{{x.notes}}</td>    
+                                    </tr>
+                                {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            
+        {% else %}
+            <p>مشترکی وجود ندارد!</p>
+        {% endif %}
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item"><a class="page-link" 
+                            href = '?page=1'>&laquo; اولین</a></li>
+                        <li class="page-item"><a class="page-link" 
+                        href = '?page={{page_obj.previous_page_number}}'>قبلی</a></li>
+                    {% endif %}
+                        <li class="page-item disabled"><a class="page-link" 
+                            href="#">صفحه {{page_obj.number}} از 
+                            {{page_obj.paginator.num_pages}}</a></li>    
+                    {% if page_obj.has_next %}
+                        <li class="page-item"><a class="page-link" 
+                            href = '?page={{page_obj.next_page_number}}'>بعدی</a></li>
+                        <li class="page-item"><a class="page-link" 
+                            href = '?page={{page_obj.paginator.num_pages}}'>
+                            آخرین &raquo; </a></li>
+                    {% endif %}
+            </ul>
+        </nav>
+
+{% endblock %}

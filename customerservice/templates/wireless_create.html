@@ -1,0 +1,29 @@
+{% extends 'new_base.html' %}
+{% block content %}
+    <script> 
+        $(document).ready(function()
+        {
+                $('#customer').select2();
+        });
+        $(document).ready(function()
+        {
+                $('#contract').select2();
+        });
+        $(document).ready(function()
+        {
+                $('#agent').select2();
+        });
+    </script>
+    <h1>افزودن سرویس وایرلس</h1>
+        <div class = 'form-group'>
+            <form action='' method='post'>
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" class="btn btn-success">افزودن</button>
+                {{form.media}}
+                <button type = 'button' class="btn btn-primary">
+                    <a href = "{% url 'customerservice:wirelesses-list' %}" >انصراف</a>
+                </button>
+            </form>
+        </div>
+    {% endblock %}

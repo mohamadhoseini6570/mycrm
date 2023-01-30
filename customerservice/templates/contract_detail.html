@@ -1,0 +1,26 @@
+{% extends 'new_base.html' %}
+{% block content %}
+    <h1>اطلاعات قرارداد:</h1>
+    {%if contract %}
+        <ul>
+            <li>نام قرارداد:<span> {{contract.name}}</span></li>
+            <li>زمان شروع: <span>{{contract.start_time}}</span></li>    
+            <li>زمان پایان: <span>{{contract.end_time}}</span></li>
+            <li>زمان انعقاد: <span>{{contract.contract_time}}</span></li>
+            <li>وضعیت: <span>{{contract.state}}</span></li>
+            <li>توضیحات: <span>{{contract.notes}}</span></li>
+        </ul>  
+    {% else %}
+        <p>هنوز قراردادی تعریف نشده است!</p>
+    {% endif %}
+    </br>
+    <button type = 'button' class="btn btn-warning">
+        <a href = "{% url 'customerservice:contract-update' pk=contract.pk %}" >ویرایش قرارداد</a>
+    </button>
+    <button type = 'button' class="btn btn-danger">
+        <a href = "{% url 'customerservice:contract-delete' pk=contract.pk %}" >حذف قرارداد</a>
+    </button> 
+    <button type = 'button' class="btn btn-primary">
+        <a href = "{% url 'customerservice:contracts-list' %}" >بازگشت </a>
+    </button> 
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'new_base.html' %}
+{% block content %}
+<h1>افزودن نماینده</h1>
+<div class = 'form-group'>
+    <form method='POST' action='#'>
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-success">افزودن</button>
+        {{form.media}}
+        <button type = 'button' class="btn btn-primary">
+            <a href = "{% url 'customerservice:agents-list' %}" >انصراف</a>
+        </button>
+    </form>
+</div>
+{% endblock %}

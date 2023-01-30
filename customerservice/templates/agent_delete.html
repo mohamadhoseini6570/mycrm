@@ -1,0 +1,17 @@
+{% extends 'new_base.html' %}
+{% block content %}
+    <h1>حذف مشترک:</h1>
+    <form method="post">
+        {% csrf_token %}
+        <p>آیا از حذف این نماینده اطمینان دارید؟</p>
+        <span id= 'deleted_item'>{{ agent }}</span>
+        <br>
+        <br>
+        <button type = 'submit' class="btn btn-primary">
+            <a>بله </a>
+        </button>
+        <button type = 'button' class="btn btn-primary">
+            <a href = "{% url 'customerservice:agent-detail-list' pk=agent.pk %}" >خیر</a>
+        </button>
+    </form>
+{% endblock %}

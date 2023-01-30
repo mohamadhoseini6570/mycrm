@@ -1,0 +1,28 @@
+{% extends 'new_base.html' %}
+{% block content %}
+    <a href = "{% url 'customerservice:contract-create' %}" >افزودن قرارداد</a> 
+    <a href = "{% url 'customerservice:customer-create' %}" >افزودن مشترک</a>
+    <a href = "{% url 'customerservice:agent-create' %}" >افزودن نماینده</a> 
+        </br>
+        </br>
+        <a href = "customers/video" >اطلاعات مربوط به مشترک ویدئو کنفرانس ایران</a> 
+
+    <h1 class = 'titr m-30' >داشبورد</h1>
+        <ul>
+            <li>تعداد کل قراردادها: {{num_contract}}</li>
+            <li>تعداد کل مشترکین: {{num_customer}}</li>
+            <li>تعداد کل نماینده ها: {{num_agent}}</li>
+            <li>تعداد کل سرویسهای وایرلس: {{num_wireless}}</li>
+        </ul>
+        </br>
+        {{user_ip}}
+        </br>
+        </br>
+        نام مشترکین اخیر:
+        </br>
+        {% for items in latest_customers %}
+            <ul>
+                <li>نام مشترک: {{items}}</li>
+            </ul>
+        {% endfor %}
+{% endblock %}

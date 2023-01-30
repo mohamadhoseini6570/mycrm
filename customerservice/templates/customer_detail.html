@@ -1,0 +1,29 @@
+{% extends 'new_base.html' %}
+
+
+{% block content %}
+    <h1>اطلاعات مشترک:</h1>
+        {%if customer %}
+            <ul>
+                <li>نام تجاری:<span> {{customer.commercialname}}</span></li>
+                <li>برند: <span>{{customer.brand}}</span></li>    
+                <li>نوع: <span>{{customer.kind}}</span></li>
+                <li>شهر: <span>{{customer.city}}</span></li>
+                <li>آدرس: <span>{{customer.address}}</span></li>
+                <li>تلفن: <span>{{customer.phone}}</span></li>
+                <li>توضیحات: <span>{{customer.notes}}</span></li>
+            </ul>  
+        {% else %}
+            <p>هنوز مشترکی تعریف نشده است!</p>
+        {% endif %}
+        </br>
+        <button type = 'button' class="btn btn-warning">
+            <a href = "{% url 'customerservice:customer-update' pk=customer.pk %}" >ویرایش قرارداد</a>
+        </button>
+        <button type = 'button' class="btn btn-danger">
+            <a href = "{% url 'customerservice:customer-delete' pk=customer.pk %}" >حذف قرارداد</a>
+        </button> 
+        <button type = 'button' class="btn btn-primary">
+            <a href = "{% url 'customerservice:customers-list' %}" >بازگشت </a>
+        </button> 
+{% endblock %}

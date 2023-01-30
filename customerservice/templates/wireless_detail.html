@@ -1,0 +1,32 @@
+{% extends 'new_base.html' %}
+{% block content %}
+    <h1>اطلاعات سرویس وایرلس:</h1>
+        {%if wireless %}
+            <ul>
+                <li>پاپ سایت :<span> {{wireless.popsite}}</span></li>
+                <li>قرارداد	: <span>{{wireless.contract}}</span></li>
+                <li>مشترک  :<span> {{wireless.customer}}</span></li>
+                <li>نماینده  :<span> {{wireless.agent}}</span></li>
+                <li>پهنای باند ارسال اینترنت: <span>{{wireless.internet_t_bw}}</span></li>    
+                <li>پهنای باند دریافت اینترنت: <span>{{wireless.internet_r_bw}}</span></li>
+                <li>پهنای باند ارسال اینترانت	: <span>{{wireless.intranet_t_bw}}</span></li>
+                <li>پهنای باند دریافت اینترانت	: <span>{{wireless.intranet_r_bw}}</span></li>
+                <li>پهنای باند ارسال نقطه به نقطه	: <span>{{wireless.throughput_t_bw}}</span></li>
+                <li>پهنای باند دریافت تقطه به نقطه	: <span>{{wireless.throughput_r_bw}}</span></li>
+                <li>آدرس IP: <span>{{wireless.ip}}</span></li>
+                <li>توضیحات	: <span>{{wireless.notes}}</span></li>
+            </ul>
+        {% else %}
+            <p>هنوز سرویس وایرلسی تعریف نشده است!</p>
+        {% endif %}
+        </br>
+        <button type = 'button' class="btn btn-warning">
+            <a href = "{% url 'customerservice:wireless-update' pk=wireless.pk %}" >ویرایش سرویس وایرلس</a>
+        </button>
+        <button type = 'button' class="btn btn-danger">
+            <a href = "{% url 'customerservice:wireless-delete' pk=wireless.pk %}" >حذف سرویس وایرلس</a>
+        </button> 
+        <button type = 'button' class="btn btn-primary">
+            <a href = "{% url 'customerservice:wirelesses-list' %}" >بازگشت </a>
+        </button> 
+{% endblock %}

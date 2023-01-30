@@ -1,0 +1,172 @@
+
+/* navbar ========================================== */
+
+#navbar {
+   display: flex;
+   justify-content: space-between; 
+   padding: 1rem;
+   height: 70px;
+   align-items: center;
+   position: sticky;
+   top: 0;
+}
+
+#navbar ul {
+    
+   display: flex;
+   list-style: none;
+   margin: 0px;
+   padding: 0px;
+   align-items: center;
+}
+
+#navbar ul li a {
+   padding: 0.5rem;
+   color: rgb(50, 38, 139);
+}
+
+#navbar ul li a:hover {
+   padding: 0.5rem;
+   background: orange;
+   color: rgb(255, 255, 255);
+   border-radius: 5px;
+}
+
+/* sidebar-nav ======================================= */
+
+.sidebar-nav {
+   font-size: 1em;
+   margin-top: 20px;
+   padding: 50;
+   list-style: none;
+   direction: rtl;
+   background: #263f8e;
+
+}
+
+
+/* html elements ================================================== */
+
+body{
+   font-family: 'Vazir', Arial, sans-serif;
+   font-weight:normal;
+   /* font-size:1vw; */
+   }
+
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+
+hr {
+   margin: 0rem;
+   /* position: sticky;
+   top: 0; */
+}
+
+ul li span{
+   color: blue;
+}
+
+/* table thead tr td {
+   text-align: center;
+} */
+
+td, th {
+   text-align: center;
+   
+   vertical-align: middle;
+}
+
+button a {
+   color: rgb(255, 255, 255);
+   text-decoration: none;
+}
+
+button a:hover {
+   color: rgb(255, 255, 255);
+   text-decoration: none;
+}
+
+
+ /* class ========================= */
+ .bg-white{
+    background: rgb(48, 136, 136);
+    /* color: blueviolet; */
+ }
+
+ 
+.titr {
+    font-weight: 600;
+}
+.m-30 {
+padding: 30px;
+}
+
+
+/* id ============================================ */
+
+ #maintitle {
+   color: rgb(160, 21, 21);
+   font-weight: 600;
+ }
+
+ #deleted_item {
+   color: rgb(160, 21, 21);
+   font-weight: 600;
+ }
+
+ 
+
+
+
+
+ @font-face {
+    font-family: Vazir;
+    font-style: normal;
+    font-weight: normal;
+    src: url('/static/fonts/Vazir.eot');
+    src: url('/static/fonts/Vazir.eot?#iefix') format('embedded-opentype'), 
+    url('/static/fonts/Vazir.woff2') format('woff2'), 
+    url('/static/fonts/Vazir.woff') format('woff'), 
+    url('/static/fonts/Vazir.ttf') format('truetype');
+   }
+   @font-face {
+    font-family: Vazir;
+    font-style: normal;
+    font-weight: bold;
+    src: url('/static/fonts/Vazir-Bold.eot');
+    src: url('/static/fonts/Vazir-Bold.eot?#iefix') format('embedded-opentype'), 
+    url('/static/fonts/Vazir-Bold.woff2') format('woff2'), 
+    url('/static/fonts/Vazir-Bold.woff') format('woff'), 
+    url('/static/fonts/Vazir-Bold.ttf') format('truetype');
+   }
+    
+    
+   
+
+   
+
+
+
+
+
+   /* old navbar */
+/* .navbar-nav {
+    font-size: 1em;
+    direction: rtl;
+}
+
+.nav-link {
+    color: rgb(33, 13, 178);
+}
+ul li { 
+    padding:5px; 
+    padding-left: 20px;
+ } */
+

@@ -1,0 +1,33 @@
+{% extends 'new_base.html' %}
+{% block content %}
+<h1>ورود به حساب کاربری</h1>
+
+{%if form.errors%}
+<p>نام یا کلمه عبور اشتباه است. لطفا مجددا وارد شوید</p>
+{%endif%}
+
+{%if next%}
+{%if user.is_authenticated%}
+<p>حساب کاربری شما به این صفحه دسترسی ندارد!</p>
+{%else%} {% comment %} maybe deleted! {% endcomment %}
+<p>لطفا جهت مشاهده صفحه وارد حساب کاربری شوید</p>
+{%endif%}
+{%endif%}
+<form method='post' action="{% url 'login'%}">
+{% csrf_token %}
+<div>
+    <td>{{form.username.label_tag}}</td>
+    <td>{{form.username}}</td>
+</div>
+<div>
+    <td>{{form.password.label_tag}}</td>
+    <td>{{form.password}}</td>
+</div>
+<div>
+    <input type='submit' value='ورود'>
+    <input type='hidden' name='next' value={{next}}>
+
+</div>
+</form>
+<p><a href= "{% url 'password_reset'%}">فراموشی نام و کلمه عبور</a></p>
+{% endblock %}

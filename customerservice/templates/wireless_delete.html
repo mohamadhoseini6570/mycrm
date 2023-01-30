@@ -1,0 +1,17 @@
+{% extends 'new_base.html' %}
+{% block content %}
+    <h1>حذف سرویس وایرلس:</h1>
+    <form method="post">
+        {% csrf_token %}
+        <p>آیا از حذف این سرویس وایرلس اطمینان دارید؟</p>
+        <span id= 'deleted_item'>{{ wireless }}</span>
+        <br>
+        <br>
+        <button type = 'submit' class="btn btn-primary">
+            <a>بله </a>
+        </button>
+        <button type = 'button' class="btn btn-primary">
+            <a href = "{% url 'customerservice:wireless-detail-list' pk=wireless.pk %}" >خیر</a>
+        </button>
+    </form>
+{% endblock %}

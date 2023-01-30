@@ -1,0 +1,26 @@
+{% extends 'new_base.html' %}
+{% block content %}
+    <h1>اطلاعات نماینده:</h1>
+    {%if agent %}
+        <ul>
+            <li>نام نماینده:<span> {{agent.name}}</span></li>
+            <li> ایمیل: <span>{{agent.email}}</span></li>    
+            <li>تلفن : <span>{{agent.phone}}</span></li>
+            <li>موبایل : <span>{{agent.mobile}}</span></li>
+            <li>نقش: <span>{{agent.role}}</span></li>
+            <li>توضیحات: <span>{{agent.notes}}</span></li>
+        </ul>  
+    {% else %}
+        <p>هنوز قراردادی تعریف نشده است!</p>
+    {% endif %}
+    </br>
+    <button type = 'button' class="btn btn-warning">
+        <a href = "{% url 'customerservice:agent-update' pk=agent.pk %}" >ویرایش نماینده</a>
+    </button>
+    <button type = 'button' class="btn btn-danger">
+        <a href = "{% url 'customerservice:agent-delete' pk=agent.pk %}" >حذف نماینده</a>
+    </button> 
+    <button type = 'button' class="btn btn-primary">
+        <a href = "{% url 'customerservice:agents-list' %}" >بازگشت </a>
+    </button> 
+{% endblock %}

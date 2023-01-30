@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang = "fa-IR" dir="rtl">
+        <head>
+                {% block title %}<title>مدیریت ارتباط با مشتری</title>{% endblock title %}
+                <meta charset = 'utf-8'>
+                <meta name = 'viewport' content = 'width=device-width, initial-scale=1'>
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.rtl.min.css" integrity="sha384-OXTEbYDqaX2ZY/BOaZV/yFGChYHtrXH2nyXJ372n2Y8abBhrqacCEe+3qhSHtLjy" crossorigin="anonymous">
+                    
+                {% comment %} <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+                <script src="/static/admin/js/core.js"></script>
+                <script src='{% url 'js-catalog'%}'></script>
+                    
+                <link rel = 'stylesheet' href = "{% static 'styles.css'%} ">
+                <link rel = 'stylesheet' media = 'screen and (max-width:678px)' href = "{% static 'mobile.css'%} "> {% endcomment %}
+        </head>
+        <body>
+
+        {% comment %} <div class = 'container-fluid bg-info'> {% endcomment %}
+            <nav class="navbar navbar-expand-sm navbar-dark bg-danger">
+                <div class="container-fluid">
+                    <img src = '/static/logo.jpg' width='160' length='70' href='www.afranet.ir'></img>
+                  <div class="collapse navbar-collapse" id="mynavbar">
+                    <ul class="navbar-nav me-auto">
+                      <li class="nav-item">
+                        <a>مدیریت ارتباط با مشتری</a>
+                        {% comment %} <a id = 'maintitle'>مدیریت ارتباط با مشتری</a> {% endcomment %}
+                      {% comment %} </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0)">Link</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0)">Link</a>
+                      </li> {% endcomment %}
+                      {% if user.is_authenticated %}
+                    <li><a>کاربر: {{user.get_username}}</a></li>
+                    <li><a href = "{% url 'logout'  %}?next={{request.path}}">خروج</a></li>
+                        {% else %}
+                    <li><a href = "{% url 'login'  %}?next={{request.path}}">ورود</a></li>
+                        {% endif %}
+                    </ul>
+                    <form class="d-flex">
+                      <input class="form-control me-2" type="text" placeholder="Search">
+                      <button class="btn btn-primary" type="button">Search</button>
+                    </form>
+                  </div>
+                </div>
+            </nav>
+        {% comment %} </div> {% endcomment %}
+              <div class = 'container-fluid bg-primary'>
+              <div class="row bg-secondary" >
+                
+                
+                <div class="col-sm-3 bg-success">.col-sm-3
+                    sidebar
+                </div>
+                        
+                <div class="col-sm-9 bg-warning">.col-sm-9
+                    {% block content %}{% endblock content %}
+                </div>
+              </div>
+              </div>
+
+
+              
+              <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+        </body>
+    </html>

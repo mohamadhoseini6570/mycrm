@@ -1,0 +1,34 @@
+{% extends 'new_base.html' %}
+
+
+{% block content %}
+    {% comment %} {% if searched %} {% endcomment %}
+        <h1>جستجوی شما:</h1>
+        {% comment %} {{searched}} {% endcomment %}
+        <br>
+        {% for customer in customerspage %}
+        <a href = "{{customer.get_absolute_url }}">{{customer.commercialname}}</a>
+        <br>
+        {% endfor %}
+        {% comment %} {% else %}
+        <h1>جستجو نکرده اید!</h1>
+    {% endif %} {% endcomment %}
+<br>
+<br>
+{{customerspage}}
+<br>
+قبلی: {{customerspage.has_prevous}}<br>
+بعدی: {{customerspage.has_next}}<br>
+فعلی: {{customerspage.number}}<br>
+تعداد: {{customerspage.paginator.num_pages}}<br>
+<hr><br><br>
+{% if customerspage.has_prevous %}
+    <a href = '?page=1'>&laquo اولین</a>
+    <a href = '?page={{customerspage.previous_page_number}}'> قبلی</a>
+{% endif %}
+صفحه {{customerspage.number}}از {{customerspage.paginator.num_pages}}
+{% if customerspage.has_next %}
+    <a href = '?page={{customerspage.next_page_number}}'>بعدی</a>
+    <a href = '?page={{customerspage.paginator.num_pages}}'>&raquo آخرین</a>
+{% endif %}
+{% endblock %}

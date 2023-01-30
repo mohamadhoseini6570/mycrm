@@ -1,0 +1,31 @@
+{% extends 'new_base.html' %}
+
+
+{% block content %}
+    {% if searched %}
+        <h1>نتایج جستجوی شما برای: <span>{{searched}}</span></h1>
+        
+        <br>
+        {% comment %} {% for customer in customer %} {% endcomment %}
+        <a href = "{{customer.get_absolute_url }}">{{customer.commercialname}}</a>
+        {% comment %} {% endfor %} {% endcomment %}
+        <br>
+
+        {% for cloud in clouds %}
+        <p>{{cloud.size}}</p>
+        <br>
+        {% endfor %}
+
+
+        {% for wireless in wirelesses %}
+        <p>{{wireless.popsite}}</p>
+        <br>
+        {% endfor %}
+
+
+        {% else %}
+        <h1>جستجو نکرده اید!</h1>
+    {% endif %}
+
+
+{% endblock %}

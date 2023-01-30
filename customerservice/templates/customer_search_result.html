@@ -1,0 +1,18 @@
+{% extends 'new_base.html' %}
+
+
+{% block content %}
+    {% if searched %}
+        <h1>نتایج جستجوی شما برای: <span>{{searched}}</span></h1>
+        
+        <br>
+        {% for customer in customers %}
+        <a href = "{{customer.get_absolute_url }}">{{customer.commercialname}}</a>
+        <br>
+        {% endfor %}
+        {% else %}
+        <h1>جستجو نکرده اید!</h1>
+    {% endif %}
+
+
+{% endblock %}

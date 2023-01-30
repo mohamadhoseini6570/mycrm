@@ -1,0 +1,67 @@
+{% extends 'new_base.html' %}
+{% block content %}
+    <br>
+        <button type = 'button' class="btn btn-success">
+            <a href = "{% url 'customerservice:contract-create' %}" >افزودن قرارداد</a>
+        </button>
+ 
+    <br>
+    <h1>لیست قرادادها:</h1>
+    {%if contract_list%}
+            <div class="table-responsive">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                            <tr>
+                                <th scope="col">نام قرارداد</th>
+                                <th scope="col">تاریخ شروع </th>   
+                                <th scope="col">تاریخ پایان </th>   
+                                <th scope="col">زمان انعقاد </th>   
+                                <th scope="col">وضعیت</th>   
+                                <th scope="col">توضیحات</th>   
+                            </tr>
+                    </thead>
+                    <tbody>
+                        {% for x in contract_list%}
+                            <tr>
+                                <th scope="row"><a 
+                                    href = "{{x.get_absolute_url }}">
+                                    {{x.name}}</a></th>
+                                <td>{{x.start_time}}</td>    
+                                <td>{{x.end_time}}</td>    
+                                <td>{{x.contract_time}}</td>    
+                                <td>{{x.state}}</td>    
+                                <td>{{x.notes}}</td>    
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    {% else %}
+        <p>قراردادی وجود ندارد!</p>
+    {% endif %}
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" 
+                        href = '?page=1'>&laquo; اولین</a></li>
+                    <li class="page-item"><a class="page-link" 
+                    href = '?page={{page_obj.previous_page_number}}'>قبلی</a></li>
+                {% endif %}
+                    <li class="page-item disabled"><a class="page-link" 
+                        href="#">صفحه {{page_obj.number}} از 
+                        {{page_obj.paginator.num_pages}}</a></li>    
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" 
+                        href = '?page={{page_obj.next_page_number}}'>بعدی</a></li>
+                    <li class="page-item"><a class="page-link" 
+                        href = '?page={{page_obj.paginator.num_pages}}'>
+                        آخرین &raquo; </a></li>
+                {% endif %}
+        </ul>
+    </nav>
+{% endblock %}
+
+
+
+
