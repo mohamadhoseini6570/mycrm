@@ -101,6 +101,13 @@ class Agent(models.Model):
     
 #----------------------------------------------------------
 
+def ip_test(value):
+    value = int(value)
+    if value >= 16 and value<=30:
+        return True
+    else:
+        raise forms.ValidationError('ff')
+
 class Wireless(models.Model):
     
     popsite_choices = (
@@ -128,6 +135,8 @@ class Wireless(models.Model):
         blank=True, null=True)
     ip = models.GenericIPAddressField(verbose_name='آدرس IP',
         error_messages={'required':'پرش کن!'})
+    prefix = models.PositiveSmallIntegerField(verbose_name = 'ُPrefix', blank= True,
+        null= True, default=29, validators= [ip_test] )
     notes = models.CharField(max_length=500, verbose_name='توضیحات',
         blank=True, null=True)
     contract = models.ForeignKey(Contract, on_delete=models.CASCADE,
@@ -167,5 +176,9 @@ class Cloud(models.Model):
     def __str__(self):
         return self.size
     
+    def get_absolute_url(self):
+        return reverse('customerservice:cloud-detail-list', args=[str(self.id)])
+    
+
     class Meta:
         ordering = ['id']

@@ -1,0 +1,29 @@
+{% extends 'new_base.html' %}
+{% block content %}
+    <h1>اطلاعات سرویس ابری:</h1>
+        {%if cloud %}
+            <ul>
+                <li>سایز:<span> {{cloud.size}}</span></li>
+                <li>قرارداد	: <span>{{cloud.contract}}</span></li>
+                <li>مشترک  :<span> {{cloud.customer}}</span></li>
+                <li>نماینده  :<span> {{cloud.agent}}</span></li>
+                <li>آدرس IP: <span>{{cloud.ip}}</span></li>
+                <li>توضیحات	: <span>{{cloud.notes}}</span></li>
+            </ul>
+        {% else %}
+
+        
+            <p>هنوز سرویس ابری ای تعریف نشده است!</p>
+        {% endif %}
+        </br>
+        
+        {%comment%} <button type = 'button' class="btn btn-warning">
+            <a href = "{% url 'customerservice:wireless-update' pk=wireless.pk %}" >ویرایش سرویس وایرلس</a>
+        </button>
+        <button type = 'button' class="btn btn-danger">
+            <a href = "{% url 'customerservice:wireless-delete' pk=wireless.pk %}" >حذف سرویس وایرلس</a>
+        </button>  {%endcomment%}
+        <button type = 'button' class="btn btn-primary">
+            <a href = "{% url 'customerservice:clouds-list' %}" >بازگشت </a>
+        </button> 
+{% endblock %}

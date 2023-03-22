@@ -10,7 +10,7 @@ from tkinter import Widget
 from tkinter.tix import Form
 from django import forms
 from django.forms import ModelForm
-from .models import Wireless, Customer, Contract, Agent
+from .models import Wireless, Customer, Contract, Agent, Cloud
 from django.forms.models import inlineformset_factory, InlineForeignKeyField
 from django.core.exceptions import ValidationError
 from django_jalali.forms import jDateTimeField, jDateField
@@ -140,6 +140,17 @@ class AgentForm(forms.Form):
     error_css_class = 'error'
     required_css_class = 'bold'
 
+    def __init__(self, *args, **kwargs):
+        initial_arguments = kwargs.get('initial', None)
+        updated_initial = {}
+        if initial_arguments:
+            user = initial_arguments.get('user', None)
+            if user:
+                updated_initial['name'] = getattr(user, 'username', None)
+                updated_initial['email'] = getattr(user, 'email', None)
+                updated_initial['notes'] = getattr(user, 'is_superuser', None)
+        kwargs.update(initial = updated_initial)
+        super(AgentForm, self).__init__(*args, **kwargs)
 # ----------------------------------------------------------------------
 
 class AgentForm2(forms.ModelForm):
@@ -178,7 +189,7 @@ class WirelessForm(forms.ModelForm):
         model = Wireless
         fields = ('popsite', 'contract', 'customer', 'agent', 'internet_t_bw', 'internet_r_bw',
                   'intranet_t_bw', 'intranet_r_bw', 'throughput_t_bw', 
-                'throughput_r_bw', 'ip', 'notes')
+                'throughput_r_bw', 'ip', 'prefix', 'notes')
         
         widgets = {
            'popsite': forms.Select(attrs={'class': 'form-control'}),
@@ -189,6 +200,7 @@ class WirelessForm(forms.ModelForm):
            'throughput_t_bw': forms.TextInput(attrs={'class': 'form-control'}),
            'throughput_r_bw': forms.TextInput(attrs={'class': 'form-control'}),
            'ip': forms.TextInput(attrs={'class': 'form-control'}),
+           'prefix': forms.TextInput(attrs={'class': 'form-control'}),
            'notes': forms.Textarea(attrs={'class': 'form-control', 'rows':3}),
            'contract': forms.Select(attrs={'class': 'form-control', 'id': 'contract'}),
         #    'contract': forms.widgets.CheckboxInput()
@@ -198,4 +210,42 @@ class WirelessForm(forms.ModelForm):
 
         }
         
-                
+
+# ==================================================================
+
+def ip_test(value):
+    value = int(value)
+    if value >= 16 and value<=30:
+        return True
+    else:
+        raise forms.ValidationError('ff') 
+
+class CloudForm(forms.ModelForm):
+    class Meta:
+        model = Cloud
+        fields = '__all__'
+    
+    sizechoices = (
+        ('Micro', 'Micro'),
+        ('Small', 'Small'),
+        ('Medium', 'Medium'),
+        ('Large', 'Large'),
+        ('XLarge', 'XLarge'),
+        ('XXLarge', 'XXLarge'),
+    )
+    size = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control'}),choices= sizechoices,
+        label='سایز', error_messages={'required':'پرش کن!'},
+        required=True, help_text='سایز سرویس را وارد کنید')
+    ip = forms.GenericIPAddressField(widget=forms.TextInput(attrs= {'class': 'form-control'}),
+        label='ip', error_messages={'required':'پرش کن!'},
+        required=True, help_text='آدرس آی پی سرویس را وارد کنید')
+    contract = forms.ModelChoiceField(queryset=Contract.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control', 'id': 'contract'}), label = 'قرارداد')
+    customer = forms.ModelChoiceField(queryset=Customer.objects.all(), 
+        widget=forms.Select(attrs={'class': 'form-control', 'id': 'customer'}), label = 'مشترک')
+    agent = forms.ModelChoiceField(queryset=Agent.objects.all(), 
+        widget=forms.Select(attrs={'class': 'form-control', 'id': 'agent'}), label = 'نماینده')
+    notes = forms.CharField(widget=forms.Textarea(attrs={'rows':3, 'class': 'form-control'})
+        ,label='توضیحات', validators=[ip_test]) 
+    error_css_class = 'error'
+    required_css_class = 'bold'

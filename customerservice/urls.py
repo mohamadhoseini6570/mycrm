@@ -34,5 +34,9 @@ urlpatterns = [
     path('customers/newsearch/', views.NewCustomerSearch, name='new-customers-search'),
     path('wireless/create', views.WirelessCreate.as_view(), name='wireless-create'),
     path('wirelesses/', views.WirelessList.as_view(), name='wirelesses-list'),  
+    path('clouds/', views.CloudList.as_view(), name='clouds-list'),
+    path('cloud/create', views.CloudCreate.as_view(), name='cloud-create'),
+    path('cloud/<int:pk>', views.CloudDetailList.as_view(), name='cloud-detail-list'),
+
 
 ]

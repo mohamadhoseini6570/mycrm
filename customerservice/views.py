@@ -19,7 +19,9 @@ from django.views.generic import CreateView, UpdateView, DeleteView, FormView, V
 from django.urls import reverse_lazy, reverse
 from django.forms import modelformset_factory
 from django.views.generic.detail import SingleObjectMixin, DetailView
-from .forms import AgentForm, AgentForm2, ContractForm, ContractForm2, CustomerForm, CustomerSearch, WirelessForm
+from .forms import AgentForm, AgentForm2, ContractForm, ContractForm2, CustomerForm, CustomerSearch, WirelessForm, CloudForm
+# from .forms import AgentForm2
+
 
 # CBV dashboard for homepage by TempalteView---------------------------------------    
 class Index(generic.TemplateView):
@@ -206,7 +208,10 @@ def AgentCreate(request):
     if request.method == 'POST':
         form = AgentForm(request.POST)
         if form.is_valid():
-            agent = models.Agent(name=form.cleaned_data['name'], email=form.cleaned_data['email'], phone=form.cleaned_data['phone'], mobile=form.cleaned_data['mobile'], role=form.cleaned_data['role'], notes=form.cleaned_data['notes'])
+            agent = models.Agent(name=form.cleaned_data['name'],
+                email=form.cleaned_data['email'], phone=form.cleaned_data['phone'],
+                mobile=form.cleaned_data['mobile'], role=form.cleaned_data['role'],
+                notes=form.cleaned_data['notes'])
             agent.save()
             # with open('./myfile', 'w') as f:
             #     myfile = File(f)
@@ -216,7 +221,8 @@ def AgentCreate(request):
             return HttpResponseRedirect(reverse('customerservice:agents-list'))
             # return HttpResponseRedirect('Thank You')
     else:
-        form = AgentForm(initial={'email':'johndoe@coffeehouse.com','name':'حسینی'})
+        form = AgentForm(initial={'email':'johndoe@coffeehouse.com','name':'حسینی',
+            'user': request.user})
     return render(request, 'agent_create.html', {'form': form})
 
 # CBV agent update by UpdateView----------------------------------------------------
@@ -270,3 +276,38 @@ class WirelessDelete(DeleteView):
     model = models.Wireless
     template_name = 'wireless_delete.html'
     success_url ="/wirelesses/"
+
+
+#==================================================================
+
+# CBV cloud list by ListView--------------------------------------------------
+class CloudList(LoginRequiredMixin, PermissionRequiredMixin ,generic.ListView):
+    model = models.Cloud 
+    template_name = 'cloud_list.html'
+    paginate_by = 5
+    # queryset = models.Cloud.objects.all()
+    permission_required = ('customerservice.view_cloud')
+
+
+# CBV cloud detail list by DetailView--------------------------------------------------  
+class CloudDetailList(generic.DetailView):
+    model = models.Cloud
+    template_name = 'cloud_detail.html'
+
+# CBV cloud creation by CreateView using forms.py and bootstrap ----------------------------------------------------
+class CloudCreate(CreateView):
+    model = models.Cloud
+    form_class = CloudForm
+    template_name = 'cloud_create.html'
+
+# CBV cloud update by UpdateView----------------------------------------------------
+class CloudUpdate(UpdateView):
+    model = models.Cloud
+    form_class = CloudForm # must be a modelform no form like ContractForm
+    template_name = 'cloud_update.html'
+
+# CBV cloud deletion by DeleteView----------------------------------------------------
+class CloudDelete(DeleteView):
+    model = models.Cloud
+    template_name = 'cloud_delete.html'
+    success_url ="/clouds/"
