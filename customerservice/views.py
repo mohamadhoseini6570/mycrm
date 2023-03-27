@@ -146,10 +146,17 @@ def CustomerSearch(request):
     if request.method == 'POST':
         searched = request.POST['searched']
         customers = models.Customer.objects.filter(commercialname__contains=searched)
-        return render(request,'customer_search_result.html',{'searched': searched, 'customers': customers})
+        return render(request,'customers_search_result.html',{'searched': searched, 'customers': customers})
     else:
-        return render(request,'customer_search_result.html',{})
+        return render(request,'customers_search_result.html',{})
 
+# # FBV customer search result ---------------------------------------
+def CustomerListServices(request, pk):
+    customer = models.Customer.objects.get(id=pk)
+    clouds = models.Cloud.objects.filter(customer=customer)
+    wirelesses = models.Wireless.objects.filter(customer=customer)
+    return render(request,'customer_list_services.html',{
+        'customer': customer, 'clouds': clouds, 'wirelesses': wirelesses})
 
 # FBV customer search with pagination ---------------------------------------    
 #https://www.youtube.com/watch?v=AGtae4L5BbI
@@ -180,10 +187,17 @@ def CustomerSearchP(request):
 def NewCustomerSearch(request):
     if request.method == 'POST':
         searched = request.POST['searched']
-        customer = models.Customer.objects.get(commercialname=searched)
-        clouds = models.Cloud.objects.filter(customer=customer)
-        wirelesses = models.Wireless.objects.filter(customer=customer)
-        return render(request,'result.html',{'searched': searched, 'customer': customer, 'clouds': clouds, 'wirelesses': wirelesses})
+        try:
+            customer = models.Customer.objects.get(commercialname=searched)
+        except models.Customer.DoesNotExist:
+            customer = None
+        if customer is not None:
+            clouds = models.Cloud.objects.filter(customer=customer)
+            wirelesses = models.Wireless.objects.filter(customer=customer)
+            return render(request,'result.html',{'searched': searched,
+                'customer': customer, 'clouds': clouds, 'wirelesses': wirelesses})
+        else:
+            return render(request,'result.html',{})
     else:
         return render(request,'result.html',{})
 #==================================================================

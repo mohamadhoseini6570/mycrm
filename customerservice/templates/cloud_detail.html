@@ -17,12 +17,12 @@
         {% endif %}
         </br>
         
-        {%comment%} <button type = 'button' class="btn btn-warning">
-            <a href = "{% url 'customerservice:wireless-update' pk=wireless.pk %}" >ویرایش سرویس وایرلس</a>
+        <button type = 'button' class="btn btn-warning">
+            <a href = "{% url 'customerservice:cloud-update' pk=cloud.pk %}" >ویرایش سرویس ابری</a>
         </button>
         <button type = 'button' class="btn btn-danger">
-            <a href = "{% url 'customerservice:wireless-delete' pk=wireless.pk %}" >حذف سرویس وایرلس</a>
-        </button>  {%endcomment%}
+            <a href = "{% url 'customerservice:cloud-delete' pk=cloud.pk %}" >حذف سرویس ابری</a>
+        </button>  
         <button type = 'button' class="btn btn-primary">
             <a href = "{% url 'customerservice:clouds-list' %}" >بازگشت </a>
         </button> 

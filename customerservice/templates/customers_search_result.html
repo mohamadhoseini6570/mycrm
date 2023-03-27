@@ -8,6 +8,8 @@
         <br>
         {% for customer in customers %}
         <a href = "{{customer.get_absolute_url }}">{{customer.commercialname}}</a>
+        <a href = "{% url 'customerservice:customer-services' pk=customer.pk %}" >
+            نمایش همه سرویسهای مشترک</a>
         <br>
         {% endfor %}
         {% else %}
