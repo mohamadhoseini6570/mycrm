@@ -175,10 +175,161 @@ class Cloud(models.Model):
 
     def __str__(self):
         return self.size
-    
+
     def get_absolute_url(self):
         return reverse('customerservice:cloud-detail-list', args=[str(self.id)])
-    
 
     class Meta:
         ordering = ['id']
+
+#----------------------------------------------------------
+
+class OtherSevices(models.Model):
+    extra_ip = models.BooleanField()
+    ip1 = models.GenericIPAddressField(verbose_name='IP1')
+    subnet_mask1 = models.PositiveSmallIntegerField(verbose_name='Subnet Mask1')
+    ip2 = models.GenericIPAddressField(verbose_name='IP2')
+    subnet_mask2 = models.PositiveSmallIntegerField(verbose_name='Subnet Mask2')
+    ip3 = models.GenericIPAddressField(verbose_name='IP3')
+    subnet_mask3 = models.PositiveSmallIntegerField(verbose_name='Subnet Mask3')
+    ip4 = models.GenericIPAddressField(verbose_name='IP4')
+    subnet_mask4 = models.PositiveSmallIntegerField(verbose_name='Subnet Mask4')
+    ip5 = models.GenericIPAddressField(verbose_name='IP5')
+    subnet_mask5 = models.PositiveSmallIntegerField(verbose_name='Subnet Mask5')
+    ip6 = models.GenericIPAddressField(verbose_name='IP6')
+    subnet_mask6 = models.PositiveSmallIntegerField(verbose_name='Subnet Mask6')
+    ip7 = models.GenericIPAddressField(verbose_name='IP7')
+    subnet_mask7 = models.PositiveSmallIntegerField(verbose_name='Subnet Mask7')
+    ip8 = models.GenericIPAddressField(verbose_name='IP8')
+    subnet_mask8 = models.PositiveSmallIntegerField(verbose_name='Subnet Mask8')
+    ip9 = models.GenericIPAddressField(verbose_name='IP9')
+    subnet_mask9 = models.PositiveSmallIntegerField(verbose_name='Subnet Mask9')
+    IP10 = models.GenericIPAddressField(verbose_name='IP10')
+    subnet_mask10 = models.PositiveSmallIntegerField(verbose_name='Subnet Mask10')
+    first_vlan = models.PositiveSmallIntegerField(verbose_name='first_vlan')
+    router_first_vlan = models.CharField(max_length=15,
+        verbose_name='router_first_vlan')
+    second_vlan = models.PositiveSmallIntegerField(verbose_name='second_vlan')
+    router_second_vlan = models.CharField(max_length=15,
+        verbose_name='router_second_vlan')
+    third_vlan = models.PositiveSmallIntegerField(verbose_name='third_vlan')
+    router_third_vlan = models.CharField(max_length=15,
+        verbose_name='router_third_vlan')
+    forth_vlan = models.PositiveSmallIntegerField(verbose_name='forth_vlan')
+    router_forth_vlan = models.CharField(max_length=15,
+        verbose_name='router_forth_vlan')
+    fifth_vlan = models.PositiveSmallIntegerField(verbose_name='fifth_vlan')
+    router_fifth_vlan = models.CharField(max_length=15,
+        verbose_name='router_fifth_vlan')
+    transmission = models.CharField(max_length=500, verbose_name='transmission')
+
+#----------------------------------------------------------
+
+class Cohost(models.Model):
+    online = models.BooleanField()
+    ip = models.GenericIPAddressField(verbose_name='IP1', 
+        blank= True, null= True)
+    dev_name = models.CharField(verbose_name='نام تجهیز', max_length=20,
+        blank= True, null= True)
+    dev_rack = models.CharField(verbose_name='شماره رک', max_length=5,
+        blank= True, null= True)
+    dev_scale_choices = (
+        ('اقتصادی', 'اقتصادی'),
+        ('استاندارد', 'استاندارد'),
+        ('پیشرفته', 'پیشرفته'),
+        ('سازمانی', 'سازمانی'),
+        ('سازمانی ویژه', 'سازمانی ویژه'),
+        ('G10-سازمانی', 'G10-سازمانی'),
+        ('G10-سازمانی ویژه', 'G10-سازمانی ویژه'),
+    )
+    dev_scale = models.CharField(max_length=20, choices=dev_scale_choices,
+        default='اقتصادی', verbose_name = 'مقیاس تجهیز')
+    dev_dc_choices = (
+        ('سهند ط 2', 'سهند ط 2'),
+        ('سهند ط 3', 'سهند ط 3'),
+        ('سهند ط 5', 'سهند ط 5'),
+        ('شاهین همکف', 'شاهین همکف'),
+        ('شاهین زیرزمین', 'شاهین زیرزمین'),
+        ('بهشتی', 'بهشتی'),
+        ('رمضانی', 'رمضانی'),
+    )
+    dev_dc = models.CharField(max_length=13, choices=dev_dc_choices,
+        default='اقتصادی', verbose_name = 'مقیاس تجهیز')
+    notes = models.CharField(max_length=500, verbose_name='توضیحات',
+        blank=True, null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    agent = models.ForeignKey(Agent, on_delete=models.CASCADE)
+    contract = models.ForeignKey(Contract, on_delete=models.CASCADE)
+
+#----------------------------------------------------------
+
+class Ip(models.Model):
+    # size = models.CharField(max_length=9, choices=sizechoices, default='اقتصادی')
+    IP = models.GenericIPAddressField(verbose_name='IP', 
+        blank= True, null= True)
+    subnet_mask = models.PositiveSmallIntegerField(verbose_name = 'ُsubnet_mask',
+        blank= True, null= True, default=29)
+    vlan = models.PositiveSmallIntegerField(verbose_name = 'vlan',
+        blank= True, null= True)
+    notes = models.CharField(max_length=500, verbose_name='توضیحات',
+        blank=True, null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    agent = models.ForeignKey(Agent, on_delete=models.CASCADE)
+    contract = models.ForeignKey(Contract, on_delete=models.CASCADE)
+
+#----------------------------------------------------------
+
+class Mpls(models.Model):
+    IP = models.GenericIPAddressField(verbose_name='IP', 
+        blank= True, null= True)
+    subnet_mask = models.PositiveSmallIntegerField(verbose_name = 'ُsubnet_mask',
+        blank= True, null= True, default=29)
+    vlan = models.PositiveSmallIntegerField(verbose_name = 'vlan',
+        blank= True, null= True)
+    notes = models.CharField(max_length=500, verbose_name='توضیحات',
+        blank=True, null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    agent = models.ForeignKey(Agent, on_delete=models.CASCADE)
+    contract = models.ForeignKey(Contract, on_delete=models.CASCADE)
+
+#----------------------------------------------------------
+
+class Colocation(models.Model):
+    dev_brand_choices = (
+        ('HP', 'HP'),
+        ('DELL', 'DELL'),
+        ('Cisco', 'Cisco'),
+        ('MikroTik', 'MikroTik'),
+        ('EMC', 'EMC'),
+        ('Other', 'Other'),
+    )
+    dev_brand = models.CharField(max_length=8, choices=dev_brand_choices,
+        default='HP', verbose_name = 'برند تجهیز')
+    dev_name = models.CharField(verbose_name='نام تجهیز', max_length=20,
+        blank= True, null= True)
+    dev_rack = models.CharField(verbose_name='شماره رک', max_length=5,
+        blank= True, null= True)
+    dev_scale_choices = (
+        ('اقتصادی', 'اقتصادی'),
+        ('استاندارد', 'استاندارد'),
+        ('پیشرفته', 'پیشرفته'),
+    )
+    dev_scale = models.CharField(max_length=9, choices=dev_scale_choices,
+        default='اقتصادی', verbose_name = 'مقیاس تجهیز')
+    dev_dc_choices = (
+        ('سهند ط 2', 'سهند ط 2'),
+        ('سهند ط 3', 'سهند ط 3'),
+        ('سهند ط 5', 'سهند ط 5'),
+        ('شاهین همکف', 'شاهین همکف'),
+        ('شاهین زیرزمین', 'شاهین زیرزمین'),
+        ('بهشتی', 'بهشتی'),
+        ('رمضانی', 'رمضانی'),
+    )
+    dev_dc = models.CharField(max_length=13, choices=dev_dc_choices,
+        default='اقتصادی', verbose_name = 'مقیاس تجهیز')
+    notes = models.CharField(max_length=500, verbose_name='توضیحات',
+        blank=True, null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    agent = models.ForeignKey(Agent, on_delete=models.CASCADE)
+    contract = models.ForeignKey(Contract, on_delete=models.CASCADE)    
+    

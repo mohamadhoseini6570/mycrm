@@ -1,0 +1,18 @@
+{% load django_listing %}
+<html>
+    <head>
+    ...
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"/>
+    {% render_listing_header %}
+    ...
+    </head>
+    ...
+    {% render_listing customers_as_model per_page=10 %}
+    ...
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+    {% render_listing_footer %}
+    </body>
+    </html>

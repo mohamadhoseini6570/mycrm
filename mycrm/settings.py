@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'customerservice.apps.CustomerserviceConfig',
     'django.contrib.admindocs',
-    'django_jalali'
+    'django_jalali',
+    'django_listing',
     
 ]
 

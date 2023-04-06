@@ -249,3 +249,23 @@ class CloudForm(forms.ModelForm):
         ,label='توضیحات', validators=[ip_test]) 
     error_css_class = 'error'
     required_css_class = 'bold'
+
+#============================================================
+class OtherSevicesForm(forms.Form):
+    extra_ip = forms.BooleanField(widget = forms.CheckboxInput(attrs = 
+        {'class': 'form-check', 'onclick' : 'extra_ip_check();',}),
+        label = 'Extra IP', required = True) 
+    ip1 = forms.GenericIPAddressField(widget = forms.TextInput(attrs = 
+        {'class': 'form-control'}), label = 'IP1',
+        error_messages = {'max_length':'ddd'})
+    subnet_mask1 = forms.IntegerField(widget = forms.NumberInput(attrs = 
+        {'class': 'form-control'}), label = 'Subnet Mask1',
+        help_text = 'Subnet Mask1 را وارد کنید')
+    notes = forms.CharField(widget = forms.Textarea(
+        attrs = {'rows' : 3, 'class' : 'form-control'}), label = 'توضیحات') #  if you are looking to add a multi-line input field to your
+        #form, add the Textarea widget to CharField(). Textarea widget renders the 
+        # field as <textarea>...</textarea>,
+    # notes = forms.Textarea(label='توضیحات') # this doesnt work also like the previous line
+    error_css_class = 'error'
+    required_css_class = 'bold'
+

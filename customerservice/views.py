@@ -19,8 +19,19 @@ from django.views.generic import CreateView, UpdateView, DeleteView, FormView, V
 from django.urls import reverse_lazy, reverse
 from django.forms import modelformset_factory
 from django.views.generic.detail import SingleObjectMixin, DetailView
-from .forms import AgentForm, AgentForm2, ContractForm, ContractForm2, CustomerForm, CustomerSearch, WirelessForm, CloudForm
+from .forms import AgentForm, AgentForm2, ContractForm, ContractForm2, CustomerForm, CustomerSearch, WirelessForm, CloudForm, OtherSevicesForm
 # from .forms import AgentForm2
+from django.forms.models import inlineformset_factory
+
+class BasicUsageListingView(generic.TemplateView):
+    template_name = 'basic_usage.html'
+    # See 'Customer' definition in "Read me first" at home page.
+    #In this exemple, Customer is a model and is exported as 
+    # customers_as_model into the template basic_usage.html.
+    # If you want, you can also use get_context_data() method instead of
+    # extra_context attribute.
+    extra_context = dict(customers_as_model = models.Customer)
+
 
 
 # CBV dashboard for homepage by TempalteView---------------------------------------    
@@ -48,7 +59,7 @@ class Index(generic.TemplateView):
 # CBV contracts list by ListView--------------------------------------------------
 class ContractList(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
     model = models.Contract 
-    template_name = 'contract_list.html'
+    template_name = 'contracts/contract_list.html'
     paginate_by = 5
     # login_url = '/accounts/login/'
     # login_url = '/'
@@ -58,7 +69,7 @@ class ContractList(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView
 # CBV contract detail list by DetailView  --------------------------------------------------  
 class ContractDetailList(generic.DetailView):# min 10
     model = models.Contract 
-    template_name = 'contract_detail.html'
+    template_name = 'contracts/contract_detail.html'
     
   
 
@@ -84,7 +95,7 @@ def ContractCreate(request):
             # return HttpResponseRedirect('Thank You')
     else:
         form = ContractForm(initial={'name':'ali'})
-    return render(request, 'contract_create.html', {'form': form})
+    return render(request, 'contracts/contract_create.html', {'form': form})
 
 
 # CBV contract update by UpdateView----------------------------------------------------
@@ -92,13 +103,13 @@ class ContractUpdate(UpdateView):
     model = models.Contract
     # form_class = ContractForm # must be a modelform no form like ContractForm
     form_class = ContractForm2 # must be a modelform like ContractForm2
-    template_name = 'contract_update.html'
+    template_name = 'contracts/contract_update.html'
     # fields = "__all__"
     
 # CBV contract deletion by DeleteView----------------------------------------------------
 class ContractDelete(DeleteView):
     model = models.Contract
-    template_name = 'contract_delete.html'
+    template_name = 'contracts/contract_delete.html'
     success_url ="/contracts/"
 
 #==================================================================
@@ -106,7 +117,7 @@ class ContractDelete(DeleteView):
 # CBV customers list by ListView--------------------------------------------------
 class CustomerList(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
     model = models.Customer #template_name = customer_list.html context = customer_list
-    template_name = 'customer_list.html'
+    template_name = 'customers/customer_list.html'
     paginate_by = 5
     queryset = models.Customer.objects.all()
     permission_required = ('customerservice.view_customer')
@@ -114,12 +125,12 @@ class CustomerList(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView
 # CBV customer detail list by DetailView--------------------------------------------------  
 class CustomerDetailList(generic.DetailView):# min 10
     model = models.Customer 
-    template_name = 'customer_detail.html'
+    template_name = 'customers/customer_detail.html'
     
 # CBV customer creation by CreateView----------------------------------------------------
 class CustomerCreate(LoginRequiredMixin, PermissionRequiredMixin ,CreateView):
     model = models.Customer
-    template_name = 'customer_create.html'
+    template_name = 'customers/customer_create.html'
     form_class= CustomerForm
     # initial = {'':}
     # success_url = reverse_lazy('customerservice:customers-list')
@@ -130,13 +141,13 @@ class CustomerCreate(LoginRequiredMixin, PermissionRequiredMixin ,CreateView):
 class CustomerUpdate(UpdateView):
     model = models.Customer
     form_class= CustomerForm
-    template_name = 'customer_update.html'
+    template_name = 'customers/customer_update.html'
     # success_url ="/customers/"
     
 # CBV customer deletion by DeleteView----------------------------------------------------
 class CustomerDelete(DeleteView):
     model = models.Customer
-    template_name = 'customer_delete.html'
+    template_name = 'customers/customer_delete.html'
     success_url ="/customers/"
 
         
@@ -146,16 +157,16 @@ def CustomerSearch(request):
     if request.method == 'POST':
         searched = request.POST['searched']
         customers = models.Customer.objects.filter(commercialname__contains=searched)
-        return render(request,'customers_search_result.html',{'searched': searched, 'customers': customers})
+        return render(request,'customers/customers_search_result.html',{'searched': searched, 'customers': customers})
     else:
-        return render(request,'customers_search_result.html',{})
+        return render(request,'customers/customers_search_result.html',{})
 
-# # FBV customer search result ---------------------------------------
+# # FBV customer search list result ---------------------------------------
 def CustomerListServices(request, pk):
     customer = models.Customer.objects.get(id=pk)
     clouds = models.Cloud.objects.filter(customer=customer)
     wirelesses = models.Wireless.objects.filter(customer=customer)
-    return render(request,'customer_list_services.html',{
+    return render(request,'customers/customer_list_services.html',{
         'customer': customer, 'clouds': clouds, 'wirelesses': wirelesses})
 
 # FBV customer search with pagination ---------------------------------------    
@@ -179,7 +190,7 @@ def CustomerSearchP(request):
                 myfile.closed
                 f.closed
         # return render(request,'customer_search_result1.html',{'searched': searched, 'customers': customers, 'customerspage': customerspage})
-        return render(request,'customer_search_result1.html',{'customerspage': customerspage})
+        return render(request,'customers/customer_search_result1.html',{'customerspage': customerspage})
     # else:
     #     return render(request,'customer_search_result1.html',{})
 
@@ -194,18 +205,18 @@ def NewCustomerSearch(request):
         if customer is not None:
             clouds = models.Cloud.objects.filter(customer=customer)
             wirelesses = models.Wireless.objects.filter(customer=customer)
-            return render(request,'result.html',{'searched': searched,
+            return render(request,'customers/result.html',{'searched': searched,
                 'customer': customer, 'clouds': clouds, 'wirelesses': wirelesses})
         else:
-            return render(request,'result.html',{})
+            return render(request,'customers/result.html',{})
     else:
-        return render(request,'result.html',{})
+        return render(request,'customers/result.html',{})
 #==================================================================
 
 # CBV agent list by ListView--------------------------------------------------
 class AgentList(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
     model = models.Agent #template_name = customer_list.html context = customer_list
-    template_name = 'agent_list.html'
+    template_name = 'agents/agent_list.html'
     paginate_by = 5
     # login_url = '/accounts/login/'
     # login_url = '/'
@@ -215,7 +226,7 @@ class AgentList(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
 # CBV agent detail list by DetailView--------------------------------------------------  
 class AgentDetailList(generic.DetailView):# min 10
     model = models.Agent 
-    template_name = 'agent_detail.html'
+    template_name = 'agents/agent_detail.html'
 
 # FBV agent creation by AgentForm (forms.Form) (forms.py)---------------------------------------    
 def AgentCreate(request):
@@ -237,19 +248,19 @@ def AgentCreate(request):
     else:
         form = AgentForm(initial={'email':'johndoe@coffeehouse.com','name':'حسینی',
             'user': request.user})
-    return render(request, 'agent_create.html', {'form': form})
+    return render(request, 'agents/agent_create.html', {'form': form})
 
 # CBV agent update by UpdateView----------------------------------------------------
 class AgentUpdate(UpdateView):
     model = models.Agent
     form_class = AgentForm2 # must be a modelform no form like ContractForm
-    template_name = 'agent_update.html'
+    template_name = 'agents/agent_update.html'
     
     
 # CBV agent deletion by DeleteView----------------------------------------------------
 class AgentDelete(DeleteView):
     model = models.Agent
-    template_name = 'agent_delete.html'
+    template_name = 'agents/agent_delete.html'
     success_url ="/agents/"
 
 #==================================================================
@@ -257,7 +268,7 @@ class AgentDelete(DeleteView):
 # CBV wireless list by ListView--------------------------------------------------
 class WirelessList(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
     model = models.Wireless #template_name = customer_list.html context = customer_list
-    template_name = 'wireless_list.html'
+    template_name = 'wirelesses/wireless_list.html'
     paginate_by = 5
     # login_url = '/accounts/login/'
     # login_url = '/'
@@ -268,13 +279,13 @@ class WirelessList(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView
 # CBV wireless detail list by DetailView--------------------------------------------------  
 class WirelessDetailList(generic.DetailView):# min 10
     model = models.Wireless 
-    template_name = 'wireless_detail.html'
+    template_name = 'wirelesses/wireless_detail.html'
 
 
 # CBV wireless creation by CreateView using forms.py and bootstrap ----------------------------------------------------
 class WirelessCreate(CreateView):
     model = models.Wireless
-    template_name = 'wireless_create.html'
+    template_name = 'wirelesses/wireless_create.html'
     form_class = WirelessForm
     # initial = {'':}
     # success_url = reverse_lazy('customerservice:wirelesses-list')
@@ -283,12 +294,12 @@ class WirelessCreate(CreateView):
 class WirelessUpdate(UpdateView):
     model = models.Wireless
     form_class = WirelessForm # must be a modelform no form like ContractForm
-    template_name = 'wireless_update.html'
+    template_name = 'wirelesses/wireless_update.html'
 
 # CBV wireless deletion by DeleteView----------------------------------------------------
 class WirelessDelete(DeleteView):
     model = models.Wireless
-    template_name = 'wireless_delete.html'
+    template_name = 'wirelesses/wireless_delete.html'
     success_url ="/wirelesses/"
 
 
@@ -297,7 +308,7 @@ class WirelessDelete(DeleteView):
 # CBV cloud list by ListView--------------------------------------------------
 class CloudList(LoginRequiredMixin, PermissionRequiredMixin ,generic.ListView):
     model = models.Cloud 
-    template_name = 'cloud_list.html'
+    template_name = 'clouds/cloud_list.html'
     paginate_by = 5
     # queryset = models.Cloud.objects.all()
     permission_required = ('customerservice.view_cloud')
@@ -306,22 +317,48 @@ class CloudList(LoginRequiredMixin, PermissionRequiredMixin ,generic.ListView):
 # CBV cloud detail list by DetailView--------------------------------------------------  
 class CloudDetailList(generic.DetailView):
     model = models.Cloud
-    template_name = 'cloud_detail.html'
+    template_name = 'clouds/cloud_detail.html'
 
 # CBV cloud creation by CreateView using forms.py and bootstrap ----------------------------------------------------
 class CloudCreate(CreateView):
     model = models.Cloud
     form_class = CloudForm
-    template_name = 'cloud_create.html'
+    template_name = 'clouds/cloud_create.html'
 
 # CBV cloud update by UpdateView----------------------------------------------------
 class CloudUpdate(UpdateView):
     model = models.Cloud
     form_class = CloudForm # must be a modelform no form like ContractForm
-    template_name = 'cloud_update.html'
+    template_name = 'clouds/cloud_update.html'
 
 # CBV cloud deletion by DeleteView----------------------------------------------------
 class CloudDelete(DeleteView):
     model = models.Cloud
-    template_name = 'cloud_delete.html'
+    template_name = 'clouds/cloud_delete.html'
     success_url ="/clouds/"
+
+#==================================================================
+
+# FBV otherservices creation by OtherSevicesForm (forms.Form) (forms.py)---------------------------------------    
+def OtherSevicesCreate(request):
+    if request.method == 'POST':
+        form = OtherSevicesForm(request.POST)
+        if form.is_valid():
+            otherservices = models.OtherSevices(extra_ip = form.cleaned_data['extra_ip'],
+                ip1 = form.cleaned_data['ip1'],
+                subnet_mask1 = form.cleaned_data['phone'],
+                notes = form.cleaned_data['notes'])
+            otherservices.save()
+            return HttpResponseRedirect(reverse('customerservice:otherserviceses-list'))
+            # return HttpResponseRedirect('Thank You')
+    else:
+        form = OtherSevicesForm(initial={'email':'johndoe@coffeehouse.com','name':'حسینی',
+            'user': request.user})
+    return render(request, 'otherservices_create.html', {'form': form})
+
+# CBV othersevices list by ListView--------------------------------------------------
+class OtherSevicesList(generic.ListView):
+    model = models.OtherSevices 
+    template_name = 'otherservices_list.html'
+    paginate_by = 5
+    # permission_required = ('customerservice.view_cloud')
