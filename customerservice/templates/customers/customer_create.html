@@ -1,15 +1,100 @@
 {% extends 'new_base.html' %}
 {% block content %}
-    <h1>افزودن مشترک</h1>
-    <div class = 'form-group'>
-        <form action='' method='post'>
-            {% csrf_token %}
-            {{form.as_p}}
-            <button type="submit" class="btn btn-success">افزودن</button>
-            {{form.media}}
-            <button type = 'button' class="btn btn-primary">
-                <a href = "{% url 'customerservice:customers-list' %}" >انصراف</a>
-            </button>
-        </form>
+    <div id="sm_ten" class="col-sm-10">
+        <div class="list_legend">افزودن مشترک:</div>
+        <div class="p-5" style = 'border: 1px solid rgb(176, 176, 173);
+        border-radius: 8px'>
+            <!-- <div class="legend">افزودن مشترک:</div> -->
+            <!-- <fieldset> -->
+                <form method='POST' action='#'>
+                    <div class="row row_form_field">
+                        <div class="col-sm-6">
+                        {% csrf_token %}
+                        {{form.commercialname.label_tag}}
+                        {% if form.commercialname.help_text %}
+                            <sup>{{form.commercialname.help_text}}</sup>
+                        {% endif %}
+                        {{form.commercialname}}
+                        {{form.commercialname.errors}}
+                        </div>
+                        <div class="col-sm-6">
+                        {{form.brand.label_tag}}
+                        {% if form.brand.help_text %}
+                            <sup>{{form.brand.help_text}}</sup>
+                        {% endif %}
+                        {{form.brand}}
+                        {{form.brand.errors}}
+                        </div>
+                    <!-- row name & brand -->
+                    </div>
+                    <div class="row row_form_field">
+                        <div class="col-sm-4">
+                        {{form.city.label_tag}}
+                        {% if form.city.help_text %}
+                            <sup>{{form.city.help_text}}</sup>
+                        {% endif %}                        {{form.city}}
+                        {{form.city.errors}}
+                        {{form.media}}
+                        </div>
+                        <div class="col-sm-4">
+                        {{form.address.label_tag}}
+                        {% if form.address.help_text %}
+                            <sup>{{form.address.help_text}}</sup>
+                        {% endif %}
+                        {{form.address}}
+                        {{form.address.errors}}
+                        </div>
+                        <div class="col-sm-4">
+                        {{form.phone.label_tag}}
+                        {% if form.phone.help_text %}
+                            <sup>{{form.phone.help_text}}</sup>
+                        {% endif %}
+                        {{form.phone}}
+                        {{form.phone.errors}}
+                        </div> 
+                    <!-- row city & address & phone -->
+                    </div> 
+                    <div class="row row_form_field">
+                        <div class="col-sm-6">
+                        {{form.kind.label_tag}}
+                        {% if form.kind.help_text %}
+                            <sup>{{form.kind.help_text}}</sup>
+                        {% endif %}
+                        {{form.kind}}
+                        {{form.kind.errors}}
+                        </div>
+                        <div class="col-sm-6">
+                        {{form.notes.label_tag}}
+                        {% if form.notes.help_text %}
+                            <sup>{{form.notes.help_text}}</sup>
+                        {% endif %}
+                        {{form.notes}}
+                        {{form.notes.errors}}
+                        </div>
+                        <div class="col-sm-6">
+                        </div>
+                    <!-- row kind & notes -->  
+                    </div>
+                    <div class="row"  style="padding-top: 25px;">
+                        <div class="col-sm-4">
+                        </div>
+                        <div class="col-sm-4 d-flex justify-content-center">
+                            <div class="ps-3">
+                                <button type="submit" class="btn btn-success">افزودن</button>
+                            </div>
+                            <div class="ps-3">
+                                <button type = 'button' class="btn btn-primary">
+                                <a href = "{% url 'customerservice:customers-list' %}" >انصراف</a>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                        </div>
+                    <!-- row form buttons -->
+                    </div>  
+                </form>
+            <!-- </fieldset> -->
+        </div>
+    <!-- sm-10 -->
     </div>
-{% endblock %}            
+{% endblock %}

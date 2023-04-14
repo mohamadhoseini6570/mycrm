@@ -1,15 +1,114 @@
 {% extends 'new_base.html' %}
 {% block content %}
-    <h1>افزودن قرارداد:</h1>
-    <div class = 'form-group'>
-        <form method='POST' action='#'>
-            {% csrf_token %}
-            {{form.as_p}}
-            <button type="submit" class="btn btn-success">افزودن</button>
-            {{form.media}}
-            <button type = 'button' class="btn btn-primary">
-                <a href = "{% url 'customerservice:contracts-list' %}" >انصراف</a>
-            </button>
-        </form>
+    <div id="sm_ten" class="col-sm-10">
+        <div class="list_legend">افزودن قرارداد:</div>
+        <!-- row form title -->
+        <!-- <div class="row" style = 'border: 9px solid rgb(242, 96, 5);
+        border-radius: 5px;'>
+                    <div class="col-sm-4" style = 'border: 9px solid rgb(255, 255, 255);
+                    border-radius: 5px;'>
+                    </div>
+                    <div class="col-sm-4" style = 'border: 9px solid rgb(255, 255, 255);
+                    border-radius: 5px;'>
+                        <div class="template_title"><h1>افزودن قرارداد:</h1></div>
+                    </div>
+                    <div class="col-sm-4" style = 'border: 9px solid rgb(255, 255, 255);
+                    border-radius: 5px;'>
+                    </div>
+        </div> -->
+        <div class="p-5" style = 'border: 1px solid rgb(176, 176, 173);
+        border-radius: 8px;'>
+            <!-- <fieldset> -->
+                <!-- <legend>افزودن قرارداد:</legend> -->
+                <form method='POST' action='#'>
+                    <div class="row">
+                        <div class="col-sm-6">
+                        {% csrf_token %}
+                        {{form.name.label_tag}}
+                        {% if form.name.help_text %}
+                            <sup>{{form.name.help_text}}</sup>
+                        {% endif %}
+                        {{form.name}}
+                        {{form.name.errors}}
+                        </div>
+                        <div class="col-sm-6">
+                        {{form.state.label_tag}}
+                        {% if form.state.help_text %}
+                            <sup>{{form.state.help_text}}</sup>
+                        {% endif %}
+                        {{form.state}}
+                        {{form.state.errors}}
+                        </div>
+                    <!-- row name & state -->
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12" style="padding-top: 25px;"></div>
+                    <!-- blank row -->
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                        {{form.contract_time.label_tag}}
+                        <!-- <label for="id_contract_time">dadsa:</label> -->
+                        {% if form.contract_time.help_text %}
+                            <sup>{{form.contract_time.help_text}}</sup>
+                        {% endif %}
+                        <!-- <img class="ui_datepicker-trigger" src="/static/admin/jquery.ui.datepicker.jalali/themes/base/images/icon-calendar.svg">
+                        <input id="id_contract_time" class="vjDateField hasDatepicker" type="text" name="contract_time" size="10" required=""> -->
+                        {{form.contract_time}}
+                        {{form.contract_time.errors}}
+                        {{form.media}}
+                        </div>
+                        <div class="col-sm-4">
+                        {{form.start_time.label_tag}}
+                        {% if form.start_time.help_text %}
+                            <sup>{{form.start_time.help_text}}</sup>
+                        {% endif %}
+                        {{form.start_time}}
+                        {{form.start_time.errors}}
+                        </div>
+                        <div class="col-sm-4">
+                        {{form.end_time.label_tag}}
+                        {% if form.end_time.help_text %}
+                            <sup>{{form.end_time.help_text}}</sup>
+                        {% endif %}
+                        {{form.end_time}}
+                        {{form.end_time.errors}}
+                        </div> 
+                    <!-- row start_time & end_time & contract_time -->
+                    </div> 
+                    <div class="row" style="padding-top: 25px;">
+                        <div class="col-sm-6">
+                        {{form.notes.label_tag}}
+                        {% if form.notes.help_text %}
+                            <sup>{{form.notes.help_text}}</sup>
+                        {% endif %}
+                        {{form.notes}}
+                        {{form.notes.errors}}
+                        </div>
+                        <div class="col-sm-6">
+                        </div>
+                    <!-- row notes -->  
+                    </div>
+                    <div class="row"  style="padding-top: 25px;">
+                        <div class="col-sm-4">
+                        </div>
+                        <div class="col-sm-4 d-flex justify-content-center">
+                            <div class="ps-3">
+                                <button type="submit" class="btn btn-success">افزودن</button>
+                            </div>
+                            <div class="ps-3">
+                                <button type = 'button' class="btn btn-primary">
+                                <a href = "{% url 'customerservice:contracts-list' %}" >انصراف</a>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                        </div>
+                    <!-- row form buttons -->
+                    </div>  
+                </form>
+            <!-- </fieldset> -->
+        </div>
+    <!-- sm-10 -->
     </div>
 {% endblock %}

@@ -9,6 +9,7 @@
    align-items: center;
    position: sticky;
    top: 0;
+   z-index:999;
 }
 
 #navbar ul {
@@ -93,22 +94,63 @@ button a:hover {
    text-decoration: none;
 }
 
+fieldset {
+   background-color: #ffffff;
+   /* margin: 10px; */
 
+ }
+ 
+ 
  /* class ========================= */
+
  .bg-white{
     background: rgb(48, 136, 136);
     /* color: blueviolet; */
  }
-
  
 .titr {
     font-weight: 600;
 }
+
 .m-30 {
 padding: 30px;
 }
 
+.template_title {
+   text-align: center;
+}
 
+.button {
+   background-color: indigo;
+}
+
+.list_legend {
+   background-color: rgb(73, 75, 148);
+   color: white;
+   padding: 5px 10px;
+   font-size: larger;
+   margin-bottom: 20px;
+   margin-top: 20px;
+   border-radius: 15px
+ }
+
+ .legend {
+   background-color: rgb(73, 75, 148);
+   color: white;
+   padding: 5px 10px;
+   font-size: larger;
+   margin-bottom: 20px;
+   /* margin-top: 20px; */
+   border-radius: 15px
+ }
+
+ .row_form_field {
+   padding: 10px;
+ }
+
+ .add_obj {
+   padding: 15px;
+ }
 /* id ============================================ */
 
  #maintitle {
@@ -124,12 +166,15 @@ padding: 30px;
  #test {
    visibility: hidden;
  }
- 
 
+ #sm_ten {
+   /* padding: 65px; */
+   padding-left: 65px;
+   padding-right: 65px;
+   /* background-color: aquamarine; */
+ }
 
-
-
- @font-face {
+@font-face {
     font-family: Vazir;
     font-style: normal;
     font-weight: normal;
@@ -139,7 +184,7 @@ padding: 30px;
     url('/static/fonts/Vazir.woff') format('woff'), 
     url('/static/fonts/Vazir.ttf') format('truetype');
    }
-   @font-face {
+@font-face {
     font-family: Vazir;
     font-style: normal;
     font-weight: bold;
@@ -149,27 +194,3 @@ padding: 30px;
     url('/static/fonts/Vazir-Bold.woff') format('woff'), 
     url('/static/fonts/Vazir-Bold.ttf') format('truetype');
    }
-    
-    
-   
-
-   
-
-
-
-
-
-   /* old navbar */
-/* .navbar-nav {
-    font-size: 1em;
-    direction: rtl;
-}
-
-.nav-link {
-    color: rgb(33, 13, 178);
-}
-ul li { 
-    padding:5px; 
-    padding-left: 20px;
- } */
-

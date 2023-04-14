@@ -1,26 +1,84 @@
 {% extends 'new_base.html' %}
 {% block content %}
-    <h1>اطلاعات قرارداد:</h1>
-    {%if contract %}
-        <ul>
-            <li>نام قرارداد:<span> {{contract.name}}</span></li>
-            <li>زمان شروع: <span>{{contract.start_time}}</span></li>    
-            <li>زمان پایان: <span>{{contract.end_time}}</span></li>
-            <li>زمان انعقاد: <span>{{contract.contract_time}}</span></li>
-            <li>وضعیت: <span>{{contract.state}}</span></li>
-            <li>توضیحات: <span>{{contract.notes}}</span></li>
-        </ul>  
-    {% else %}
-        <p>هنوز قراردادی تعریف نشده است!</p>
-    {% endif %}
-    </br>
-    <button type = 'button' class="btn btn-warning">
-        <a href = "{% url 'customerservice:contract-update' pk=contract.pk %}" >ویرایش قرارداد</a>
-    </button>
-    <button type = 'button' class="btn btn-danger">
-        <a href = "{% url 'customerservice:contract-delete' pk=contract.pk %}" >حذف قرارداد</a>
-    </button> 
-    <button type = 'button' class="btn btn-primary">
-        <a href = "{% url 'customerservice:contracts-list' %}" >بازگشت </a>
-    </button> 
+<div id="sm_ten" class="col-sm-10">
+    <div class="list_legend">جزئیات قراداد:</div>
+    <div class="p-5" style = 'border: 1px solid rgb(176, 176, 173);
+    border-radius: 8px'>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <!-- <thead>
+                        <tr>
+                            <th scope="col">نام قرارداد</th>
+                            <th scope="col">تاریخ شروع </th>   
+                            <th scope="col">تاریخ پایان </th>   
+                            <th scope="col">زمان انعقاد </th>   
+                            <th scope="col">وضعیت</th>   
+                            <th scope="col">توضیحات</th>   
+                        </tr>
+                </thead>
+                <tbody>
+                    
+                        <tr>
+                            <th scope="row">{{contract.name}}</th>
+                            <td>{{contract.start_time}}</td>    
+                            <td>{{contract.end_time}}</td>    
+                            <td>{{contract.contract_time}}</td>    
+                            <td>{{contract.state}}</td>    
+                            <td>{{contract.notes}}</td>    
+                        </tr>
+                </tbody> -->
+                <tr>
+                    <th scope="col">نام قرارداد</th>
+                    <td scope="col">{{contract.name}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">وضعیت</th>
+                    <td>{{contract.state}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">تاریخ انعقاد</th>
+                    <td>{{contract.contract_time}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">تاریخ شروع </th>
+                    <td>{{contract.start_time}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">تاریخ پایان </th>
+                    <td>{{contract.end_time}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">توضیحات</th>
+                    <td>{{contract.notes}}</td>
+                </tr>
+            </table>
+        </div> 
+
+        <div class="row"  style="padding-top: 25px;">
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-4 d-flex justify-content-center">
+                <div class="ps-3">
+                    <button type = 'button' class="btn btn-warning">
+                        <a href = "{% url 'customerservice:contract-update' pk=contract.pk %}" >ویرایش</a>
+                    </button>
+                </div>
+                <div class="ps-3">
+                    <button type = 'button' class="btn btn-danger">
+                        <a href = "{% url 'customerservice:contract-delete' pk=contract.pk %}" >حذف</a>
+                    </button>
+                </div>
+                <div class="ps-3">
+                    <button type = 'button' class="btn btn-primary">
+                        <a href = "{% url 'customerservice:contracts-list' %}" >بازگشت </a>
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-4">
+            </div>
+        <!-- row form buttons -->
+        </div>
+    </div>
+<!-- sm-10 -->
+</div>
 {% endblock %}

@@ -1,29 +1,67 @@
 {% extends 'new_base.html' %}
-
-
 {% block content %}
-    <h1>اطلاعات مشترک:</h1>
-        {%if customer %}
-            <ul>
-                <li>نام تجاری:<span> {{customer.commercialname}}</span></li>
-                <li>برند: <span>{{customer.brand}}</span></li>    
-                <li>نوع: <span>{{customer.kind}}</span></li>
-                <li>شهر: <span>{{customer.city}}</span></li>
-                <li>آدرس: <span>{{customer.address}}</span></li>
-                <li>تلفن: <span>{{customer.phone}}</span></li>
-                <li>توضیحات: <span>{{customer.notes}}</span></li>
-            </ul>  
-        {% else %}
-            <p>هنوز مشترکی تعریف نشده است!</p>
-        {% endif %}
-        </br>
-        <button type = 'button' class="btn btn-warning">
-            <a href = "{% url 'customerservice:customer-update' pk=customer.pk %}" >ویرایش قرارداد</a>
-        </button>
-        <button type = 'button' class="btn btn-danger">
-            <a href = "{% url 'customerservice:customer-delete' pk=customer.pk %}" >حذف قرارداد</a>
-        </button> 
-        <button type = 'button' class="btn btn-primary">
-            <a href = "{% url 'customerservice:customers-list' %}" >بازگشت </a>
-        </button> 
+<div id="sm_ten" class="col-sm-10">
+    <div class="list_legend">جزئیات مشترک:</div>
+    <div class="p-5" style = 'border: 1px solid rgb(176, 176, 173);
+    border-radius: 8px'>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <tr>
+                    <th scope="col">نام</th>
+                    <td scope="col">{{customer.commercialname}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">برند</th>
+                    <td>{{customer.brand}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">شهر</th>
+                    <td>{{customer.city}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">آدرس</th>
+                    <td>{{customer.address}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">تلفن</th>
+                    <td>{{customer.phone}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">نوع</th>
+                    <td>{{customer.kind}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">توضیحات</th>
+                    <td>{{customer.notes}}</td>
+                </tr>
+            </table>
+        </div> 
+
+        <div class="row"  style="padding-top: 25px;">
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-4 d-flex justify-content-center">
+                <div class="ps-3">
+                    <button type = 'button' class="btn btn-warning">
+                        <a href = "{% url 'customerservice:customer-update' pk=customer.pk %}" >ویرایش</a>
+                    </button>
+                </div>
+                <div class="ps-3">
+                    <button type = 'button' class="btn btn-danger">
+                        <a href = "{% url 'customerservice:customer-delete' pk=customer.pk %}" >حذف</a>
+                    </button>
+                </div>
+                <div class="ps-3">
+                    <button type = 'button' class="btn btn-primary">
+                        <a href = "{% url 'customerservice:customers-list' %}" >بازگشت </a>
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-4">
+            </div>
+        <!-- row form buttons -->
+        </div>
+    </div>
+<!-- sm-10 -->
+</div>
 {% endblock %}
