@@ -13,8 +13,8 @@
                     <div class="input-group">
                         <input class="form-control border-end-0 border rounded-pill" placeholder = 'جستجوی مشترک' name = 'searched' type="search" id="example-search-input" >
                         <span class="input-group-append">
-                            <button class="btn btn-outline-secondary bg-white border-start-0 border rounded-pill ms-n3 invisible" type="button">
-                                <!-- <i class="fa fa-search"></i> -->
+                            <button class="btn btn-outline-secondary bg-white border-start-0 border rounded-pill ms-n3" type="submit" style="margin-right: 10px;">
+                                <i class="fa fa-search">جستجو</i>
                             </button>
                         </span>
                     </div>
@@ -38,7 +38,10 @@
                 
                 <input type="submit" value="جستجوی جدید">
             </form> -->
-            <div class="list_legend">لیست مشترکین:</div>
+            <div class="list_legend d-flex justify-content-between">
+                <div>لیست مشترکین:</div>
+                <div ><img src="/static/customer.png" width="40"></div>
+            </div>
             {%if customer_list%}
                     <div class="table-responsive">
                         <table class="table table-striped table-hover table-bordered">

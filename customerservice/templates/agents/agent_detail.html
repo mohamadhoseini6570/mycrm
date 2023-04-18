@@ -1,26 +1,66 @@
 {% extends 'new_base.html' %}
 {% block content %}
-    <h1>اطلاعات نماینده:</h1>
-    {%if agent %}
-        <ul>
-            <li>نام نماینده:<span> {{agent.name}}</span></li>
-            <li> ایمیل: <span>{{agent.email}}</span></li>    
-            <li>تلفن : <span>{{agent.phone}}</span></li>
-            <li>موبایل : <span>{{agent.mobile}}</span></li>
-            <li>نقش: <span>{{agent.role}}</span></li>
-            <li>توضیحات: <span>{{agent.notes}}</span></li>
-        </ul>  
-    {% else %}
-        <p>هنوز قراردادی تعریف نشده است!</p>
-    {% endif %}
-    </br>
-    <button type = 'button' class="btn btn-warning">
-        <a href = "{% url 'customerservice:agent-update' pk=agent.pk %}" >ویرایش نماینده</a>
-    </button>
-    <button type = 'button' class="btn btn-danger">
-        <a href = "{% url 'customerservice:agent-delete' pk=agent.pk %}" >حذف نماینده</a>
-    </button> 
-    <button type = 'button' class="btn btn-primary">
-        <a href = "{% url 'customerservice:agents-list' %}" >بازگشت </a>
-    </button> 
+<div id="sm_ten" class="col-sm-10">
+    <div class="list_legend d-flex justify-content-between">
+        <div>اطلاعات نماینده:</div>
+        <div ><img src="/static/agent.png" width="40"></div>
+    </div>    
+    <div class="p-5" style = 'border: 1px solid rgb(176, 176, 173);
+    border-radius: 8px'>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <tr>
+                    <th scope="col">نام</th>
+                    <td scope="col">{{agent.name}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">ایمیل</th>
+                    <td>{{agent.email}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">تلفن</th>
+                    <td>{{agent.phone}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">موبایل</th>
+                    <td>{{agent.mobile}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">نقش</th>
+                    <td>{{agent.role}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">توضیحات</th>
+                    <td>{{agent.notes}}</td>
+                </tr>
+            </table>
+        </div> 
+
+        <div class="row"  style="padding-top: 25px;">
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-4 d-flex justify-content-center">
+                <div class="ps-3">
+                    <button type = 'button' class="btn btn-warning">
+                        <a href = "{% url 'customerservice:agent-update' pk=agent.pk %}" >ویرایش</a>
+                    </button>
+                </div>
+                <div class="ps-3">
+                    <button type = 'button' class="btn btn-danger">
+                        <a href = "{% url 'customerservice:agent-delete' pk=agent.pk %}" >حذف</a>
+                    </button>
+                </div>
+                <div class="ps-3">
+                    <button type = 'button' class="btn btn-primary">
+                        <a href = "{% url 'customerservice:agents-list' %}" >بازگشت </a>
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-4">
+            </div>
+        <!-- row form buttons -->
+        </div>
+    </div>
+<!-- sm-10 -->
+</div>
 {% endblock %}

@@ -6,8 +6,10 @@
                 <a href = "{% url 'customerservice:contract-create' %}" >افزودن قرارداد</a>
             </button>
         </div>
-            <div class="list_legend">لیست قرادادها:</div>
-            {%if contract_list%}
+        <div class="list_legend d-flex justify-content-between">
+            <div>لیست قراردادها:</div>
+            <div ><img src="/static/contract.png" width="40"></div>
+        </div>            {%if contract_list%}
                     <div class="table-responsive">
                         <table class="table table-striped table-hover table-bordered">
                             <thead>

@@ -1,7 +1,10 @@
 {% extends 'new_base.html' %}
 {% block content %}
     <div id="sm_ten" class="col-sm-10">
-        <div class="list_legend">افزودن مشترک:</div>
+        <div class="list_legend d-flex justify-content-between">
+            <div>افزودن مشترک:</div>
+            <div ><img src="/static/customer.png" width="40"></div>
+        </div>        
         <div class="p-5" style = 'border: 1px solid rgb(176, 176, 173);
         border-radius: 8px'>
             <!-- <div class="legend">افزودن مشترک:</div> -->
@@ -32,7 +35,8 @@
                         {{form.city.label_tag}}
                         {% if form.city.help_text %}
                             <sup>{{form.city.help_text}}</sup>
-                        {% endif %}                        {{form.city}}
+                        {% endif %}                        
+                        {{form.city}}
                         {{form.city.errors}}
                         {{form.media}}
                         </div>

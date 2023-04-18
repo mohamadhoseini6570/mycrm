@@ -1,32 +1,94 @@
 {% extends 'new_base.html' %}
 {% block content %}
-    <h1>اطلاعات سرویس وایرلس:</h1>
-        {%if wireless %}
-            <ul>
-                <li>پاپ سایت :<span> {{wireless.popsite}}</span></li>
-                <li>قرارداد	: <span>{{wireless.contract}}</span></li>
-                <li>مشترک  :<span> {{wireless.customer}}</span></li>
-                <li>نماینده  :<span> {{wireless.agent}}</span></li>
-                <li>پهنای باند ارسال اینترنت: <span>{{wireless.internet_t_bw}}</span></li>    
-                <li>پهنای باند دریافت اینترنت: <span>{{wireless.internet_r_bw}}</span></li>
-                <li>پهنای باند ارسال اینترانت	: <span>{{wireless.intranet_t_bw}}</span></li>
-                <li>پهنای باند دریافت اینترانت	: <span>{{wireless.intranet_r_bw}}</span></li>
-                <li>پهنای باند ارسال نقطه به نقطه	: <span>{{wireless.throughput_t_bw}}</span></li>
-                <li>پهنای باند دریافت تقطه به نقطه	: <span>{{wireless.throughput_r_bw}}</span></li>
-                <li>آدرس IP: <span>{{wireless.ip}}</span></li>
-                <li>توضیحات	: <span>{{wireless.notes}}</span></li>
-            </ul>
-        {% else %}
-            <p>هنوز سرویس وایرلسی تعریف نشده است!</p>
-        {% endif %}
-        </br>
-        <button type = 'button' class="btn btn-warning">
-            <a href = "{% url 'customerservice:wireless-update' pk=wireless.pk %}" >ویرایش سرویس وایرلس</a>
-        </button>
-        <button type = 'button' class="btn btn-danger">
-            <a href = "{% url 'customerservice:wireless-delete' pk=wireless.pk %}" >حذف سرویس وایرلس</a>
-        </button> 
-        <button type = 'button' class="btn btn-primary">
-            <a href = "{% url 'customerservice:wirelesses-list' %}" >بازگشت </a>
-        </button> 
+<div id="sm_ten" class="col-sm-10">
+    <div class="list_legend d-flex justify-content-between">
+        <div>اطلاعات سرویس وایرلس:</div>
+        <div ><img src="/static/wireless.png" width="40"></div>
+    </div>
+    <div class="p-5" style = 'border: 1px solid rgb(176, 176, 173);
+    border-radius: 8px'>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <tr>
+                    <th scope="col">پاپ سایت</th>
+                    <td scope="col">{{wireless.popsite}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">آدرس IP</th>
+                    <td>{{wireless.ip}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">Prefix</th>
+                    <td>{{wireless.prefix}}</td>
+                </tr>
+                <tr>
+                    <th scope="col"> پهنای باند ارسال اینترنت </th>
+                    <td>{{wireless.internet_t_bw}}</td>
+                </tr>
+                <tr>
+                    <th scope="col"> پهنای باند دریافت اینترنت </th>
+                    <td>{{wireless.internet_r_bw}}</td>
+                </tr>
+                <tr>
+                    <th scope="col"> پهنای باند ارسال اینترانت </th>
+                    <td>{{wireless.intranet_t_bw}}</td>
+                </tr>
+                <tr>
+                    <th scope="col"> پهنای باند دریافت اینترانت </th>
+                    <td>{{wireless.intranet_r_bw}}</td>
+                </tr>
+                <tr>
+                    <th scope="col"> پهنای باند ارسال نقطه به نقطه</th>
+                    <td>{{wireless.throughput_t_bw}}</td>
+                </tr>
+                <tr>
+                    <th scope="col"> پهنای باند دریافت نقطه به نقطه </th>
+                    <td>{{wireless.throughput_r_bw}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">توضیحات</th>
+                    <td>{{wireless.prefix}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">قرارداد</th>
+                    <td>{{wireless.contract}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">مشترک</th>
+                    <td>{{wireless.customer}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">نماینده</th>
+                    <td>{{wireless.agent}}</td>
+                </tr>
+            </table>
+        </div> 
+
+        <div class="row"  style="padding-top: 25px;">
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-4 d-flex justify-content-center">
+                <div class="ps-3">
+                    <button type = 'button' class="btn btn-warning">
+                        <a href = "{% url 'customerservice:wireless-update' pk=wireless.pk %}" >ویرایش</a>
+                    </button>
+                </div>
+                <div class="ps-3">
+                    <button type = 'button' class="btn btn-danger">
+                        <a href = "{% url 'customerservice:wireless-delete' pk=wireless.pk %}" >حذف</a>
+                    </button>
+                </div>
+                <div class="ps-3">
+                    <button type = 'button' class="btn btn-primary">
+                        <a href = "{% url 'customerservice:wirelesses-list' %}" >بازگشت </a>
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-4">
+            </div>
+        <!-- row form buttons -->
+        </div>
+    </div>
+<!-- sm-10 -->
+</div>
 {% endblock %}

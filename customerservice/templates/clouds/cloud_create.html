@@ -1,29 +1,102 @@
 {% extends 'new_base.html' %}
 {% block content %}
-    <script> 
-        $(document).ready(function()
-        {
-                $('#customer').select2();
-        });
-        $(document).ready(function()
-        {
-                $('#contract').select2();
-        });
-        $(document).ready(function()
-        {
-                $('#agent').select2();
-        });
-    </script>
-    <h1>افزودن سرویس ابری</h1>
-        <div class = 'form-group'>
-            <form action='' method='post'>
-                {% csrf_token %}
-                {{form.as_p}}
-                <button type="submit" class="btn btn-success">افزودن</button>
-                {{form.media}}
-                <button type = 'button' class="btn btn-primary">
-                    <a href = "{% url 'customerservice:clouds-list' %}" >انصراف</a>
-                </button>
-            </form>
+<script> 
+    $(document).ready(function()
+    {
+            $('#customer').select2();
+    });
+    $(document).ready(function()
+    {
+            $('#contract').select2();
+    });
+    $(document).ready(function()
+    {
+            $('#agent').select2();
+    });
+</script>
+    <div id="sm_ten" class="col-sm-10">      
+        <div class="list_legend d-flex justify-content-between">
+            <div>افزودن سرور ابری:</div>
+            <div ><img src="/static/cloud.png" width="40"></div>
         </div>
-    {% endblock %}
+        <div class="p-5" style = 'border: 1px solid rgb(176, 176, 173);
+        border-radius: 8px'>
+                <form method='POST' action='#'>
+                    <div class="row row_form_field">
+                        <div class="col-sm-4">
+                        {% csrf_token %}
+                        {{form.size.label_tag}}
+                        {% if form.size.help_text %}
+                            <sup>{{form.size.help_text}}</sup>
+                        {% endif %}
+                        {{form.size}}
+                        {{form.size.errors}}
+                        </div>
+                        <div class="col-sm-4">
+                        {{form.ip.label_tag}}
+                        {% if form.ip.help_text %}
+                            <sup>{{form.ip.help_text}}</sup>
+                        {% endif %}
+                        {{form.ip}}
+                        {{form.ip.errors}}
+                        </div>
+                        <div class="col-sm-4">
+                            {{form.notes.label_tag}}
+                            {% if form.notes.help_text %}
+                                <sup>{{form.notes.help_text}}</sup>
+                            {% endif %}
+                            {{form.notes}}
+                            {{form.notes.errors}}
+                            {{form.media}}
+                            </div>
+                    <!-- row size & ip & notes -->
+                    </div>
+                    <div class="row row_form_field">
+                        <div class="col-sm-4">
+                            {{form.contract.label_tag}}
+                            {% if form.contract.help_text %}
+                                <sup>{{form.contract.help_text}}</sup>
+                            {% endif %}
+                            {{form.contract}}
+                            {{form.contract.errors}}
+                        </div>
+                        <div class="col-sm-4">
+                        {{form.customer.label_tag}}
+                        {% if form.customer.help_text %}
+                            <sup>{{form.customer.help_text}}</sup>
+                        {% endif %}
+                        {{form.customer}}
+                        {{form.customer.errors}}
+                        </div>
+                        <div class="col-sm-4">
+                            {{form.agent.label_tag}}
+                            {% if form.agent.help_text %}
+                                <sup>{{form.agent.help_text}}</sup>
+                            {% endif %}
+                            {{form.agent}}
+                            {{form.agent.errors}}
+                        </div>
+                    <!-- row contract & customer & agent -->  
+                    </div>
+                    <div class="row"  style="padding-top: 25px;">
+                        <div class="col-sm-4">
+                        </div>
+                        <div class="col-sm-4 d-flex justify-content-center">
+                            <div class="ps-3">
+                                <button type="submit" class="btn btn-success">افزودن</button>
+                            </div>
+                            <div class="ps-3">
+                                <button type = 'button' class="btn btn-primary">
+                                <a href = "{% url 'customerservice:clouds-list' %}" >انصراف</a>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                        </div>
+                    <!-- row form buttons -->
+                    </div>  
+                </form>
+        </div>
+    <!-- sm-10 -->
+    </div>
+{% endblock %}

@@ -1,17 +1,169 @@
 {% extends 'new_base.html' %}
-
 {% block content %}
-    <h1>به روز رسانی اطلاعات سرویس وایرلس:</h1>
-
-    <div class = 'form-group'>
-        <form method='POST' action='#'><form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-success">به روز رسانی</button>
-            {{form.media}}
-            <button type = 'button' class="btn btn-primary">
-                <a href = "{% url 'customerservice:wireless-detail-list' pk=wireless.pk %}" >انصراف</a>
-            </button>
-        </form>
+<script> 
+    $(document).ready(function()
+    {
+            $('#customer').select2();
+    });
+    $(document).ready(function()
+    {
+            $('#contract').select2();
+    });
+    $(document).ready(function()
+    {
+            $('#agent').select2();
+    });
+</script>
+    <div id="sm_ten" class="col-sm-10">
+        <div class="list_legend d-flex justify-content-between">
+            <div>ویرایش سرویس وایرلس:</div>
+            <div ><img src="/static/wireless.png" width="40"></div>
+        </div>
+        <div class="p-5" style = 'border: 1px solid rgb(176, 176, 173);
+        border-radius: 8px'>
+                <form method='POST' action='#'>
+                    <div class="row row_form_field">
+                        <div class="col-sm-4">
+                        {% csrf_token %}
+                        {{form.popsite.label_tag}}
+                        {% if form.popsite.help_text %}
+                            <sup>{{form.popsite.help_text}}</sup>
+                        {% endif %}
+                        {{form.popsite}}
+                        {{form.popsite.errors}}
+                        </div>
+                        <div class="col-sm-4">
+                        {{form.ip.label_tag}}
+                        {% if form.ip.help_text %}
+                            <sup>{{form.ip.help_text}}</sup>
+                        {% endif %}
+                        {{form.ip}}
+                        {{form.ip.errors}}
+                        </div>
+                        <div class="col-sm-4">
+                            {{form.prefix.label_tag}}
+                            {% if form.prefix.help_text %}
+                                <sup>{{form.prefix.help_text}}</sup>
+                            {% endif %}
+                            {{form.prefix}}
+                            {{form.prefix.errors}}
+                            {{form.media}}
+                            </div>
+                    <!-- row popsite & ip & prefix -->
+                    </div>
+                    <div class="row row_form_field">
+                        <div class="col-sm-3">
+                        {{form.internet_t_bw.label_tag}}
+                        {% if form.internet_t_bw.help_text %}
+                            <sup>{{form.internet_t_bw.help_text}}</sup>
+                        {% endif %}
+                        {{form.internet_t_bw}}
+                        {{form.internet_t_bw.errors}}
+                        </div>
+                        <div class="col-sm-3">
+                        {{form.internet_r_bw.label_tag}}
+                        {% if form.internet_r_bw.help_text %}
+                            <sup>{{form.internet_r_bw.help_text}}</sup>
+                        {% endif %}
+                        {{form.internet_r_bw}}
+                        {{form.internet_r_bw.errors}}
+                        </div>
+                        <div class="col-sm-3">
+                            {{form.intranet_t_bw.label_tag}}
+                            {% if form.intranet_t_bw.help_text %}
+                                <sup>{{form.intranet_t_bw.help_text}}</sup>
+                            {% endif %}
+                            {{form.intranet_t_bw}}
+                            {{form.intranet_t_bw.errors}}
+                            {{form.media}}
+                        </div>
+                        <div class="col-sm-3">
+                            {{form.intranet_r_bw.label_tag}}
+                            {% if form.intranet_r_bw.help_text %}
+                                <sup>{{form.intranet_r_bw.help_text}}</sup>
+                            {% endif %}
+                            {{form.intranet_r_bw}}
+                            {{form.intranet_r_bw.errors}}
+                            {{form.media}}
+                        </div>
+                        
+                    <!-- row internet_t_bw & internet_r_bw & intranet_t_bw & intranet_r_bw -->
+                    </div>
+                    <div class="row row_form_field">
+                        <div class="col-sm-4">
+                            {{form.throughput_t_bw.label_tag}}
+                            {% if form.throughput_t_bw.help_text %}
+                                <sup>{{form.throughput_t_bw.help_text}}</sup>
+                            {% endif %}
+                            {{form.throughput_t_bw}}
+                            {{form.throughput_t_bw.errors}}
+                            {{form.media}}
+                        </div>
+                        <div class="col-sm-4">
+                            {{form.throughput_r_bw.label_tag}}
+                            {% if form.throughput_r_bw.help_text %}
+                                <sup>{{form.throughput_r_bw.help_text}}</sup>
+                            {% endif %}
+                            {{form.throughput_r_bw}}
+                            {{form.throughput_r_bw.errors}}
+                            {{form.media}}
+                        </div>
+                        <div class="col-sm-4">
+                            {{form.notes.label_tag}}
+                            {% if form.notes.help_text %}
+                                <sup>{{form.notes.help_text}}</sup>
+                            {% endif %}
+                            {{form.notes}}
+                            {{form.notes.errors}}
+                        </div>
+                    <!-- row throughput_t_bw & throughput_r_bw & notes -->  
+                    </div>
+                    <div class="row row_form_field">
+                        <div class="col-sm-4">
+                            {{form.contract.label_tag}}
+                            {% if form.contract.help_text %}
+                                <sup>{{form.contract.help_text}}</sup>
+                            {% endif %}
+                            {{form.contract}}
+                            {{form.contract.errors}}
+                        </div>
+                        <div class="col-sm-4">
+                        {{form.customer.label_tag}}
+                        {% if form.customer.help_text %}
+                            <sup>{{form.customer.help_text}}</sup>
+                        {% endif %}
+                        {{form.customer}}
+                        {{form.customer.errors}}
+                        </div>
+                        <div class="col-sm-4">
+                            {{form.agent.label_tag}}
+                            {% if form.agent.help_text %}
+                                <sup>{{form.agent.help_text}}</sup>
+                            {% endif %}
+                            {{form.agent}}
+                            {{form.agent.errors}}
+                        </div>
+                    <!-- row contract & customer & agent -->  
+                    </div>
+                    <div class="row"  style="padding-top: 25px;">
+                        <div class="col-sm-4">
+                        </div>
+                        <div class="col-sm-4 d-flex justify-content-center">
+                            <div class="ps-3">
+                                <button type="submit" class="btn btn-warning">ویرایش</button>
+                            </div>
+                            <div class="ps-3">
+                                <button type = 'button' class="btn btn-primary">
+                                <a href = "{% url 'customerservice:wireless-detail-list' pk=wireless.pk %}" >انصراف</a>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                        </div>
+                    <!-- row form buttons -->
+                    </div>  
+                </form>
+        </div>
+    <!-- sm-10 -->
     </div>
 {% endblock %}

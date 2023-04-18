@@ -1,15 +1,93 @@
 {% extends 'new_base.html' %}
 {% block content %}
-<h1>افزودن نماینده</h1>
-<div class = 'form-group'>
-    <form method='POST' action='#'>
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit" class="btn btn-success">افزودن</button>
-        {{form.media}}
-        <button type = 'button' class="btn btn-primary">
-            <a href = "{% url 'customerservice:agents-list' %}" >انصراف</a>
-        </button>
-    </form>
-</div>
+    <div id="sm_ten" class="col-sm-10">
+        <div class="list_legend d-flex justify-content-between">
+            <div>افزودن نماینده:</div>
+            <div ><img src="/static/agent.png" width="40"></div>
+        </div>        
+        <div class="p-5" style = 'border: 1px solid rgb(176, 176, 173);
+        border-radius: 8px'>
+                <form method='POST' action='#'>
+                    <div class="row row_form_field">
+                        <div class="col-sm-6">
+                        {% csrf_token %}
+                        {{form.name.label_tag}}
+                        {% if form.name.help_text %}
+                            <sup>{{form.name.help_text}}</sup>
+                        {% endif %}
+                        {{form.name}}
+                        {{form.name.errors}}
+                        </div>
+                        <div class="col-sm-6">
+                        {{form.email.label_tag}}
+                        {% if form.email.help_text %}
+                            <sup>{{form.email.help_text}}</sup>
+                        {% endif %}
+                        {{form.email}}
+                        {{form.email.errors}}
+                        </div>
+                    <!-- row name & email -->
+                    </div>
+                    <div class="row row_form_field">
+                        <div class="col-sm-6">
+                        {{form.phone.label_tag}}
+                        {% if form.phone.help_text %}
+                            <sup>{{form.phone.help_text}}</sup>
+                        {% endif %}
+                        {{form.phone}}
+                        {{form.phone.errors}}
+                        {{form.media}}
+                        </div>
+                        <div class="col-sm-6">
+                        {{form.mobile.label_tag}}
+                        {% if form.mobile.help_text %}
+                            <sup>{{form.mobile.help_text}}</sup>
+                        {% endif %}
+                        {{form.mobile}}
+                        {{form.mobile.errors}}
+                        </div>
+                    <!-- row phone & mobile & phone -->
+                    </div> 
+                    <div class="row row_form_field">
+                        <div class="col-sm-6">
+                        {{form.role.label_tag}}
+                        {% if form.role.help_text %}
+                            <sup>{{form.role.help_text}}</sup>
+                        {% endif %}
+                        {{form.role}}
+                        {{form.role.errors}}
+                        </div>
+                        <div class="col-sm-6">
+                        {{form.notes.label_tag}}
+                        {% if form.notes.help_text %}
+                            <sup>{{form.notes.help_text}}</sup>
+                        {% endif %}
+                        {{form.notes}}
+                        {{form.notes.errors}}
+                        </div>
+                        <div class="col-sm-6">
+                        </div>
+                    <!-- row kind & notes -->  
+                    </div>
+                    <div class="row"  style="padding-top: 25px;">
+                        <div class="col-sm-4">
+                        </div>
+                        <div class="col-sm-4 d-flex justify-content-center">
+                            <div class="ps-3">
+                                <button type="submit" class="btn btn-success">افزودن</button>
+                            </div>
+                            <div class="ps-3">
+                                <button type = 'button' class="btn btn-primary">
+                                <a href = "{% url 'customerservice:agents-list' %}" >انصراف</a>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                        </div>
+                    <!-- row form buttons -->
+                    </div>  
+                </form>
+        </div>
+    <!-- sm-10 -->
+    </div>
 {% endblock %}

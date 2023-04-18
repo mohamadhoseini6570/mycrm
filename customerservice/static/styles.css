@@ -125,17 +125,22 @@ padding: 30px;
 }
 
 .list_legend {
-   background-color: rgb(73, 75, 148);
-   color: white;
+   /* background-color: rgb(96, 98, 151); */
+   color: rgb(96, 98, 151);
    padding: 5px 10px;
-   font-size: larger;
+   font-size: x-large;
    margin-bottom: 20px;
    margin-top: 20px;
-   border-radius: 15px
+   border-radius: 15px;
+   height: 55px;
+   /* text-align: center; */
+   /* border-color: rgb(96, 98, 151);
+   border-width: 5px; */
+   border: 3px solid rgb(96, 98, 151);
  }
 
  .legend {
-   background-color: rgb(73, 75, 148);
+   background-color: rgb(90, 93, 177);
    color: white;
    padding: 5px 10px;
    font-size: larger;
@@ -151,6 +156,30 @@ padding: 30px;
  .add_obj {
    padding: 15px;
  }
+
+ .deleted_obj {
+   text-align: center;
+   /* color: aqua; */
+ }
+
+.btn-primary,
+.btn-primary:active,
+.btn-primary:visited {
+   background-color: rgb(96, 98, 151);
+    border-color: #373a62;
+}
+
+.btn-primary:hover {
+   background-color: rgb(122, 59, 59) !important;
+}
+
+.btn-primary:focus {
+   background-color: rgb(79, 16, 24) !important;
+}
+
+.fa-search:hover{
+   color: rgb(96, 98, 151);;
+}
 /* id ============================================ */
 
  #maintitle {
