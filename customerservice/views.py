@@ -150,49 +150,10 @@ class CustomerDelete(DeleteView):
     template_name = 'customers/customer_delete.html'
     success_url ="/customers/"
 
-        
-# # FBV customer search ---------------------------------------    
-# #https://www.youtube.com/watch?v=AGtae4L5BbI
-def CustomerSearch(request):
-    if request.method == 'POST':
-        searched = request.POST['searched']
-        customers = models.Customer.objects.filter(commercialname__contains=searched)
-        return render(request,'customers/customers_search_result.html',{'searched': searched, 'customers': customers})
-    else:
-        return render(request,'customers/customers_search_result.html',{})
-
-# # FBV customer search list result ---------------------------------------
-def CustomerListServices(request, pk):
-    customer = models.Customer.objects.get(id=pk)
-    clouds = models.Cloud.objects.filter(customer=customer)
-    wirelesses = models.Wireless.objects.filter(customer=customer)
-    return render(request,'customers/customer_list_services.html',{
-        'customer': customer, 'clouds': clouds, 'wirelesses': wirelesses})
 
 # FBV customer search with pagination ---------------------------------------    
 #https://www.youtube.com/watch?v=AGtae4L5BbI
 #https://www.youtube.com/watch?v=N-PB-HMFmdo
-def CustomerSearchP(request):
-    
-    
-    # if request.method == 'POST':
-        # searched = request.POST['searched']
-        # customers = models.Customer.objects.filter(commercialname__contains=searched)
-        
-        
-        # p = Paginator(customers.all(), 2)
-        p = Paginator(models.Customer.objects.all(), 2) # returns <django.core.paginator.Paginator object at 0x000001BF990FCBB0>
-        page = request.GET.get('page') #page of current request # returns int number
-        customerspage = p.get_page(page) # returns <Page 3 of 7>
-        with open('./myfile', 'w') as f:
-                myfile = File(f)
-                myfile.write(str(customerspage))
-                myfile.closed
-                f.closed
-        # return render(request,'customer_search_result1.html',{'searched': searched, 'customers': customers, 'customerspage': customerspage})
-        return render(request,'customers/customer_search_result1.html',{'customerspage': customerspage})
-    # else:
-    #     return render(request,'customer_search_result1.html',{})
 
 # FBV customer search with all related services  ---------------------------------------    
 def NewCustomerSearch(request):
@@ -362,3 +323,42 @@ class OtherSevicesList(generic.ListView):
     template_name = 'otherservices_list.html'
     paginate_by = 5
     # permission_required = ('customerservice.view_cloud')
+
+
+        
+# finalized FBV customer search ---------------------------------------    
+# #https://www.youtube.com/watch?v=AGtae4L5BbI
+def Search(request):
+    if request.method == 'POST':
+        searched = request.POST['searched']
+        customers_commercialname = models.Customer.objects.filter(commercialname__contains=searched)
+        customers_brand = models.Customer.objects.filter(brand__contains=searched)
+        agents_name = models.Agent.objects.filter(name__contains=searched)
+        return render(request,'search/search_results.html',
+        {'searched': searched,
+         'customers_commercialname': customers_commercialname,
+         'customers_brand': customers_brand, 'agents_name': agents_name})
+    else:
+        return render(request,'search/search_results.html',{})
+
+# finalized FBV customer search list result ---------------------------------------
+def CustomersSearchFound(request, pk):
+    customer = models.Customer.objects.get(id=pk)
+    clouds = models.Cloud.objects.filter(customer=customer)
+    wirelesses = models.Wireless.objects.filter(customer=customer)
+    return render(request,'search/customers_search_found.html',{
+        'customer': customer, 'clouds': clouds, 'wirelesses': wirelesses})
+
+# finalized FBV customer search list result ---------------------------------------
+def AgentsSearchFound(request, pk):
+    agent = models.Agent.objects.get(id=pk)
+
+    clouds = models.Cloud.objects.filter(agent=agent)
+    wirelesses = models.Wireless.objects.filter(agent=agent)
+    return render(request,'search/agents_search_found.html',{
+        'agent': agent, 'clouds': clouds, 'wirelesses': wirelesses})
+
+
+# CBV dashboard for homepage by TempalteView---------------------------------------    
+class SearchPanel(generic.TemplateView):
+    template_name = 'search/search_panel.html'

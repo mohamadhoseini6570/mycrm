@@ -1,0 +1,67 @@
+{% extends 'new_base.html' %}
+{% block content %}
+<div id="sm_ten" class="col-sm-10">
+    <div class="list_legend d-flex justify-content-between">
+        <div>نتایج جستجو برای <span id="deleted_item">{{searched}}</span>:</div>
+        <div ><img src="/static/search.png" width="40"></div>
+    </div>
+    <div class="p-5" style = 'border: 1px solid rgb(176, 176, 173);
+    border-radius: 8px'>
+        {% if searched %}
+            <br>
+                <p>نتایج جستجو در نام تجاری مشترکین:</p>
+                {%if customers_commercialname %}
+                    {% for customer in customers_commercialname %}
+                        <div style="text-align: center;">
+                            <a href = "{{customer.get_absolute_url }}">{{customer.commercialname}}</a>&nbsp;&nbsp;:::&nbsp;&nbsp;
+                            <a href = "{% url 'customerservice:customer-search-found' pk=customer.pk %}" >
+                                    همه سرویسهای این مشترک</a>
+                            <br>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div style="text-align: center; color: darkred;">
+                        <p>مشترکی یافت نشد!</p>
+                    </div>
+                {% endif %}
+            <br>
+                <p>نتایج جستجو در برند مشترکین:</p>
+                {%if customers_brand %}
+                    {% for customer in customers_brand %}
+                        <div style="text-align: center;">
+                            <a href = "{{customer.get_absolute_url }}">{{customer.brand}}</a>&nbsp;&nbsp;:::&nbsp;&nbsp;
+                            <a href = "{% url 'customerservice:customer-search-found' pk=customer.pk %}" >
+                                همه سرویسهای این مشترک</a>
+                            <br>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div style="text-align: center; color: darkred;">
+                        <p>مشترکی یافت نشد!</p>
+                    </div>
+                {% endif %}
+            <br>
+                <p>نتایج جستجو در نمایندگان مشترکین:</p>
+                {%if agents_name %}
+                    {% for agent in agents_name %}
+                        <div style="text-align: center;">
+                            <a href = "{{agent.get_absolute_url }}">{{agent.name}}</a>&nbsp;&nbsp;:::&nbsp;&nbsp;
+                            <a href = "{% url 'customerservice:agents-search-found' pk=agent.pk %}" >
+                                همه مشترکین این نماینده</a>
+                            <br>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div style="text-align: center; color: darkred;">
+                        <p>نماینده ای یافت نشد!</p>
+                    </div>
+                {% endif %}
+            {% else %}
+                <h1>جستجو نکرده اید!</h1>
+            {% endif %}
+    </div>
+<!-- sm-10 -->    
+</div>
+{% endblock %}
+
+customers_brand

@@ -1,0 +1,101 @@
+{% extends 'new_base.html' %}
+{% block content %}
+<div id="sm_ten" class="col-sm-10">
+    <div class="list_legend d-flex justify-content-between">
+        <div>همه مشترکین نماینده:<span  id="deleted_item">{{agent}}</span></div>
+        <div ><img src="/static/search.png" width="40"></div>
+    </div>
+
+    <div class="p-3" style = 'border: 1px solid rgb(176, 176, 173);
+    border-radius: 8px'>
+            {% if wirelesses %}
+            <div class="list_legend_search d-flex justify-content-between">
+                <div>سرویسهای وایرلس:</div>
+                <div ><img src="/static/wireless.png" width="30"></div>
+            </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead class="table-primary">
+                                <tr>
+                                    <th scope="col">پاپ سایت</th>
+                                    <th scope="col">IP آدرس</th>   
+                                    <th scope="col">Prefix</th>   
+                                    <th scope="col"> پهنای باند ارسال اینترنت </th>   
+                                    <th scope="col"> پهنای باند دریافت اینترنت </th>   
+                                    <th scope="col"> پهنای باند ارسال اینترانت </th>   
+                                    <th scope="col"> پهنای باند دریافت اینترانت </th>   
+                                    <th scope="col"> پهنای باند ارسال نقطه به نقطه </th>   
+                                    <th scope="col"> پهنای باند دریافت نقطه به نقطه </th>   
+                                    <th scope="col">توضیحات</th>   
+                                    <th scope="col">قرارداد</th>   
+                                    <th scope="col">مشترک</th>   
+                                    <th scope="col">نماینده</th>   
+                                </tr>
+                        </thead>
+                        <tbody>
+                            {% for wireless in wirelesses%}
+                                <tr>
+                                    <th scope="row">
+                                        <a href="{{wireless.get_absolute_url }}">
+                                        {{wireless.popsite}}</a></th>
+                                    <td>{{wireless.ip}}</td>    
+                                    <td>{{wireless.prefix}}</td>    
+                                    <td>{{wireless.internet_t_bw}}</td>    
+                                    <td>{{wireless.internet_r_bw}}</td>    
+                                    <td>{{wireless.intranet_t_bw}}</td>    
+                                    <td>{{wireless.intranet_r_bw}}</td>    
+                                    <td>{{wireless.throughput_t_bw}}</td>    
+                                    <td>{{wireless.throughput_r_bw}}</td>    
+                                    <td>{{wireless.notes}}</td>    
+                                    <td>
+                                        <a href = "{{wireless.contract.get_absolute_url }}">
+                                        {{wireless.contract}}</a></td>    
+                                    <td>{{wireless.customer}}</td>    
+                                    <td>{{wireless.agent}}</td>    
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+            <br>
+            {% if clouds %}
+            <div class="list_legend_search d-flex justify-content-between">
+                <div>سرویسهای ابری:</div>
+                <div ><img src="/static/cloud.png" width="30"></div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead class="table-primary">
+                            <tr>
+                                <th scope="col">سایز</th>
+                                <th scope="col">IP</th>   
+                                <th scope="col">توضیحات</th>   
+                                <th scope="col">قرارداد</th>   
+                                <th scope="col">مشترک</th>   
+                                <th scope="col">نماینده</th>   
+                            </tr>
+                    </thead>
+                    <tbody>
+                        {% for cloud in clouds%}
+                            <tr>
+                                <th scope="row">
+                                    <a href="{{cloud.get_absolute_url }}">
+                                    {{cloud.size}}</a></th>
+                                <td>{{cloud.ip}}</td>    
+                                <td>{{cloud.notes}}</td>    
+                                <td>
+                                    <a href = "{{cloud.contract.get_absolute_url }}">
+                                    {{cloud.contract}}</a></td>    
+                                <td>{{cloud.customer}}</td>    
+                                <td>{{cloud.agent}}</td>    
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+    </div>
+<!-- sm-10 -->
+</div>
+{% endblock %}

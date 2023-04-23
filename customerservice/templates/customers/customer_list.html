@@ -8,7 +8,7 @@
         </div>
             <!-- https://stackoverflow.com/questions/45696685/search-input-with-an-icon-bootstrap -->
             <div class="p-3">
-                <form method='post' action='{% url 'customerservice:customers-search' %}'>
+                <form method='post' action='{% url 'customerservice:search' %}'>
                     {% csrf_token %}
                     <div class="input-group">
                         <input class="form-control border-end-0 border rounded-pill" placeholder = 'جستجوی مشترک' name = 'searched' type="search" id="example-search-input" >
@@ -20,24 +20,6 @@
                     </div>
                 </form>
             </div>
-            <!-- <form method='post' action='{% url 'customerservice:customers-search' %}'>
-                {% csrf_token %}
-                <input type='search' placeholder = 'جستجو' name = 'searched'>
-                
-                <input type="submit" value="جستجو">
-            </form>
-            <form method='post' action='{% url 'customerservice:customers-searchp' %}'>
-                {% csrf_token %}
-                <input type='search' placeholder = 'جستجو' name = 'searched'>
-                
-                <input type="submit" value="جستجو پی">
-            </form> -->
-            <!-- <form method='post' action='{% url 'customerservice:new-customers-search' %}'>
-                {% csrf_token %}
-                <input type='search' placeholder = 'جستجو' name = 'searched'>
-                
-                <input type="submit" value="جستجوی جدید">
-            </form> -->
             <div class="list_legend d-flex justify-content-between">
                 <div>لیست مشترکین:</div>
                 <div ><img src="/static/customer.png" width="40"></div>

@@ -22,7 +22,7 @@
           <nav id = 'navbar' class="bg-white">
             
                 <img src = '/static/logo.jpg' width='160' length='70' href='www.afranet.ir'></img>
-                <a id = 'maintitle'>مدیریت ارتباط با مشتری</a>
+                <a id = 'maintitle'>پنل پشتیبانی فنی </a>
                 <ul>
                     
                         {% if user.is_authenticated %}
@@ -43,6 +43,7 @@
                   <div class="position-static d-flex justify-content-center">
                     <div class="btn-group-vertical w-100">
                         <a href="{% url 'customerservice:index' %}" class="btn btn-primary">داشبورد</a>
+                        <a href="{% url 'customerservice:search-panel' %}" class="btn btn-primary">جستجو</a>
                         <a href="{% url 'customerservice:contracts-list' %}" class="btn btn-primary">قراردادها</a>
                         <a href="{% url 'customerservice:customers-list' %}" class="btn btn-primary">مشترکین</a>
                         <a href="{% url 'customerservice:agents-list' %}" class="btn btn-primary">نمایندگان</a>
