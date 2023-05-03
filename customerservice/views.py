@@ -6,7 +6,19 @@ from multiprocessing import context
 from django.core.paginator import Paginator
 from django.views.generic import ListView
 from django.views.generic.list import ListView
-# from django import forms
+#-----for REST
+from django.http import HttpResponse
+import json
+#-----for REST Framework
+from .serializers import CustomerSerializer, ContractSerializer, AgentSerializer, WirelessSerializer
+from rest_framework.decorators import api_view
+from rest_framework.views import APIView
+from rest_framework.response import Response
+# from rest_framework.response import Response
+from rest_framework import generics
+from rest_framework import viewsets
+#----
+from django.core import serializers
 from urllib import request
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.http import HttpResponseRedirect
@@ -362,3 +374,54 @@ def AgentsSearchFound(request, pk):
 # CBV dashboard for homepage by TempalteView---------------------------------------    
 class SearchPanel(generic.TemplateView):
     template_name = 'search/search_panel.html'
+
+# FBV rest_customer: Standard view method designed as REST service: p550
+def rest_customer(request):
+    customer_list = models.Customer.objects.all()
+    customer_names = [{"commercialname":customer.commercialname} for customer in customer_list]
+    return HttpResponse(json.dumps(customer_names), content_type = 'application/json')
+
+# FBV rest_customer: Standard view method as REST service with parameters and different output formats: p551
+def rest_customer_detail(request, customer_id = None):
+    customer_list = models.Customer.objects.all()
+    if customer_id:
+        customer_list = customer_list.filter(id = customer_id)
+    if 'type' in request.GET and request.GET['type'] == 'xml':
+        serialized_customers = serializers.serialize('xml', customer_list)
+        return HttpResponse(serialized_customers, content_type = 'application/xml')
+    else:
+        serialized_customers = serializers.serialize('json', customer_list)
+        return HttpResponse(serialized_customers, content_type = 'application/json')
+
+# FBV rest_customer: Django view method decorated with Django REST framework: p556
+@api_view(['GET', 'POST', 'DELETE'])
+def rest_customer_drf(request):
+    if request.method == 'GET':
+        customers = models.Customer.objects.all()
+        serializer = CustomerSerializer(customers, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        pass
+    elif request.method == 'DELETE':
+        pass
+#CBV Django REST framework class-based views p:558
+class RestContractList(APIView):
+    def get(self, request, format = None):
+        contracts = models.Contract.objects.all()
+        serializer = ContractSerializer(contracts, many = True)
+        return Response(serializer.data)
+    def post(self, request, format = None):
+        pass
+    def delete(self, request, format = None):
+        pass
+
+# Django mixed-in generic class views in Django REST framework p:560
+class RestAgentList(generics.ListCreateAPIView):
+    queryset = models.Agent.objects.all()
+    serializer_class = AgentSerializer
+
+
+# Django viewset class in Django REST framework p:560
+class RestWirelessViewSet(viewsets.ModelViewSet):
+    queryset = models.Wireless.objects.all()
+    serializer_class = WirelessSerializer

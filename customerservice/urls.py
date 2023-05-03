@@ -2,10 +2,17 @@ from django.urls import path, re_path
 # from django.conf.urls import url
 from django.views.generic import TemplateView
 from . import views
+from rest_framework import routers
+from django.conf.urls import include
 
 app_name = 'customerservice'
 
+router = routers.DefaultRouter()
+router.register('wireless', views.RestWirelessViewSet)
+
 urlpatterns = [
+    path('rest/', include(router.urls)), #router instance is assigned under the
+        #r'^rest/' url, which means the final root url
     path('', views.Index.as_view(), name='index'),
     path('search/', views.SearchPanel.as_view(), name='search-panel'),
     path('basic_usage/', views.BasicUsageListingView.as_view(),
@@ -68,4 +75,14 @@ urlpatterns = [
         name='cloud-create'),
     path('cloud/<int:pk>', views.CloudDetailList.as_view(),
         name='cloud-detail-list'),
+    path('rest/customer', views.rest_customer,
+        name='rest-customer'),
+    path('rest/customer/<int:customer_id>', views.rest_customer_detail,
+        name='rest-customer-detail'),
+    path('restdrf/customer', views.rest_customer_drf,
+        name='rest-customer-drf'),
+    path('restdrf/contract', views.RestContractList.as_view(),
+        name='rest-contract-drf'),
+    path('restdrf/agent', views.RestAgentList.as_view(),
+        name='rest-agent-drf'),
 ]
