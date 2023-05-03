@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.admindocs',
     'django_jalali',
     'django_listing',
+    'rest_framework',
     
 ]
 
