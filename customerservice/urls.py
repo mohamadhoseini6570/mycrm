@@ -85,4 +85,6 @@ urlpatterns = [
         name='rest-contract-drf'),
     path('restdrf/agent', views.RestAgentList.as_view(),
         name='rest-agent-drf'),
+    path('session', views.session_test,
+        name='session_test'),
 ]

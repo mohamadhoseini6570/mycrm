@@ -13,28 +13,12 @@
             
                 <a href = "customers/video" >اطلاعات مربوط به مشترک ویدئو کنفرانس ایران</a> 
 
-            <h1 class = 'titr m-30' >داشبورد</h1>
-                <ul>
-                    <li>تعداد کل قراردادها: {{num_contract}}</li>
-                    <li>تعداد کل مشترکین: {{num_customer}}</li>
-                    <li>تعداد کل نماینده ها: {{num_agent}}</li>
-                    <li>تعداد کل سرویسهای وایرلس: {{num_wireless}}</li>
-                </ul>
-                </br>
-                <p>Your IP is:</p>{{user_ip}}
-                </br>
+            
                 </br>
                 <p>Numbers of visits:</p>{{num_visits}}
                 </br>
                 <!-- <p>after deleting emergeny-fix</p> -->
-                </br>
-                نام مشترکین اخیر:
-                </br>
-                {% for items in latest_customers %}
-                    <ul>
-                        <li>نام مشترک: {{items}}</li>
-                    </ul>
-                {% endfor %}
+                
         </div>
     <!-- sm-10 -->
     </div>

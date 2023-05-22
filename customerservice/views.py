@@ -44,7 +44,10 @@ class BasicUsageListingView(generic.TemplateView):
     # extra_context attribute.
     extra_context = dict(customers_as_model = models.Customer)
 
-
+def session_test(request):
+    num_visits = request.session.get('num_visits', 0)
+    request.session['num_visits'] = num_visits + 1
+    return render(request, 'session_test.html', {'num_visits': num_visits})
 
 # CBV dashboard for homepage by TempalteView---------------------------------------    
 class Index(generic.TemplateView):
@@ -52,6 +55,8 @@ class Index(generic.TemplateView):
     template_name = 'index.html'
     def get_context_data(self, **kwargs):
         user_ip = self.request.META['REMOTE_ADDR']
+        # num_visits = request.session.get('num_visits', 0)
+        # request.session['num_visits'] = num_visits + 1
         context1 = super().get_context_data(**kwargs)
         # context1['latest_customers'] = models.Customer.objects.all()[:7]
         context1['latest_customers'] = models.Customer.objects.all().order_by('-id')[:5]
