@@ -35,15 +35,6 @@ from .forms import AgentForm, AgentForm2, ContractForm, ContractForm2, CustomerF
 # from .forms import AgentForm2
 from django.forms.models import inlineformset_factory
 
-class BasicUsageListingView(generic.TemplateView):
-    template_name = 'basic_usage.html'
-    # See 'Customer' definition in "Read me first" at home page.
-    #In this exemple, Customer is a model and is exported as 
-    # customers_as_model into the template basic_usage.html.
-    # If you want, you can also use get_context_data() method instead of
-    # extra_context attribute.
-    extra_context = dict(customers_as_model = models.Customer)
-
 def session_test(request):
     num_visits = request.session.get('num_visits', 0)
     request.session['num_visits'] = num_visits + 1
@@ -66,6 +57,7 @@ class Index(generic.TemplateView):
                     'num_customer' : models.Customer.objects.all().count(),
                     'num_agent' : models.Agent.objects.all().count(),
                     'num_wireless' : models.Wireless.objects.all().count(),
+                    'num_cloud' : models.Cloud.objects.all().count(),
                     }
         context3 = dict(context1)
         context3.update(context2)

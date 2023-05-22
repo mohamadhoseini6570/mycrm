@@ -26,17 +26,25 @@
                 <ul>
                     
                         {% if user.is_authenticated %}
-                    <li><a>کاربر: {{user.get_username}}</a></li>
-                    <li><a href = "{% url 'logout'  %}?next={{request.path}}">خروج</a></li>
+                    <li><a  style="padding: 0.5rem; font-size: small;">کاربر: {{user.get_username}}</a></li>
+                    <li>
+                        <button type = 'button' class="btn btn-primary">
+                            <a href = "{% url 'logout'  %}?next={{request.path}}">خروج</a>
+                        </button>
+                    </li>
                         {% else %}
-                    <li><a href = "{% url 'login'  %}?next={{request.path}}">ورود</a></li>
+                    <li>
+                        <button type = 'button' class="btn btn-primary">
+                            <a href = "{% url 'login'  %}?next={{request.path}}">ورود</a>
+                        </button>
+                    </li>
                         {% endif %} 
                 </ul>
           </nav>  
 
 
         <hr>
-
+        <br>
         <div class="container p-2">
             <div class="row">
                 <div class="col-sm-2 ">
@@ -49,8 +57,8 @@
                         <a href="{% url 'customerservice:agents-list' %}" class="btn btn-primary">نمایندگان</a>
                         <a href="{% url 'customerservice:wirelesses-list' %}" class="btn btn-primary">سرویس وایرلس</a>
                         <a href="{% url 'customerservice:clouds-list' %}" class="btn btn-primary">سرویس ابری</a>
-                        <a href="{% url 'customerservice:otherserviceses-list' %}" class="btn btn-primary">سایر سرویسها</a>
-                        <a href="/rest" class="btn btn-primary"> Restfull API</a>
+                        <a href="{% url 'customerservice:otherserviceses-list' %}" class="btn btn-primary">سرویس فضای دیتاسنتر </a>
+                        <a href="/rest" class="btn btn-primary" target="_blank"> Restfull API</a>
                         
                     </div>
                   </div>
