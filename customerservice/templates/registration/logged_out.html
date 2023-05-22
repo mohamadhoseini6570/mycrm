@@ -1,7 +1,14 @@
 {% extends 'new_base.html' %}
 {% block content %}
-<p1>شما از حساب کاربری خود خارج شدید!</p1>
-<br>
-<a href = "{% url 'login' %}">ورود دوباره</a>
-
+<div id="sm_ten" class="col-sm-10">
+    <div class="p-5" style = 'border: 1px solid rgb(176, 176, 173);
+    border-radius: 8px'>
+        <div style="text-align: center;">
+            <p1>شما از حساب کاربری خود خارج شدید!</p1>
+            <br>
+            <a href = "{% url 'login' %}">ورود دوباره</a>
+        </div>
+    </div>
+<!-- sm-10 -->
+</div>
 {% endblock %}

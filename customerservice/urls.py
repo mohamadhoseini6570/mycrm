@@ -15,8 +15,6 @@ urlpatterns = [
         #r'^rest/' url, which means the final root url
     path('', views.Index.as_view(), name='index'),
     path('search/', views.SearchPanel.as_view(), name='search-panel'),
-    path('basic_usage/', views.BasicUsageListingView.as_view(),
-        name='basic_usage'),
     path('contract/create', views.ContractCreate, name='contract-create'),
     path('agent/create', views.AgentCreate, name='agent-create'),
     path('customers/', views.CustomerList.as_view(), name='customers-list'),

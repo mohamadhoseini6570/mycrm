@@ -1,33 +1,67 @@
 {% extends 'new_base.html' %}
 {% block content %}
-<h1>ورود به حساب کاربری</h1>
-
-{%if form.errors%}
-<p>نام یا کلمه عبور اشتباه است. لطفا مجددا وارد شوید</p>
-{%endif%}
-
-{%if next%}
-{%if user.is_authenticated%}
-<p>حساب کاربری شما به این صفحه دسترسی ندارد!</p>
-{%else%} {% comment %} maybe deleted! {% endcomment %}
-<p>لطفا جهت مشاهده صفحه وارد حساب کاربری شوید</p>
-{%endif%}
-{%endif%}
-<form method='post' action="{% url 'login'%}">
-{% csrf_token %}
-<div>
-    <td>{{form.username.label_tag}}</td>
-    <td>{{form.username}}</td>
+<div id="sm_ten" class="col-sm-10">
+    <div class="p-5" style = 'border: 1px solid rgb(176, 176, 173);
+    border-radius: 8px'>        
+                <div class="row row_form_field" style="text-align: center;">
+                    <h4 class="p-3">ورود به حساب کاربری</h4>
+                    {%if form.errors%}
+                        <p>نام یا کلمه عبور اشتباه است. لطفا مجددا وارد شوید</p>
+                    {%endif%}
+                    {%if next%}
+                        {%if user.is_authenticated%}
+                            <p>حساب کاربری شما به این صفحه دسترسی ندارد!</p>
+                        {%else%} {% comment %} maybe deleted! {% endcomment %}
+                            <!-- <p>لطفا جهت مشاهده صفحه وارد حساب کاربری شوید</p> -->
+                        {%endif%}
+                    {%endif%}
+                    <form method='post' action="{% url 'login'%}">
+                        {% csrf_token %}
+                        <div class="row row_form_field">
+                            <div class="col-sm-3">
+                            </div>
+                            <div class="col-sm-3">
+                                نام کاربری 
+                            </div>
+                            <div class="col-sm-3">
+                                {{form.username}}
+                            </div>
+                            <div class="col-sm-3">
+                            </div>
+                        </div>
+                        <div class="row row_form_field">
+                            <div class="col-sm-3">
+                            </div>
+                            <div class="col-sm-3">
+                                 کلمه عبور 
+                            </div>
+                            <div class="col-sm-3">
+                                {{form.password}}
+                            </div>
+                            <div class="col-sm-3">
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top: 25px;">
+                            <div class="col-sm-4">
+                            </div>
+                            <div class="col-sm-4 d-flex justify-content-center">
+                                <div class="ps-3">
+                                    <button type="submit" class="btn btn-primary">ورود</button>
+                                    <input type='hidden' name='next' value={{next}}>
+                                </div>
+                                <div class="ps-3" style="align-self: center;">
+                                    <!-- <button type = 'button' class="btn btn-primary"> -->
+                                        <a href= "{% url 'password_reset'%}">فراموش کرده ام!</a>
+                                    <!-- </button> -->
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                            </div>
+                        <!-- row form buttons -->
+                        </div>
+                    </form>
+                </div>
+    </div>
+<!-- sm-10 -->
 </div>
-<div>
-    <td>{{form.password.label_tag}}</td>
-    <td>{{form.password}}</td>
-</div>
-<div>
-    <input type='submit' value='ورود'>
-    <input type='hidden' name='next' value={{next}}>
-
-</div>
-</form>
-<p><a href= "{% url 'password_reset'%}">فراموشی نام و کلمه عبور</a></p>
 {% endblock %}
