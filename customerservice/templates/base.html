@@ -18,8 +18,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js" integrity="sha512-5+FrEmSijjxRArJWeLcCIEgoQYAgU0gSa9MgNMN+tVSS+MPZsEk9a7OkPZr7AzjNJng1Kl+tXOQVtJcsU+Ax0w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
-
-
+    
+    <link rel='icon' href='/static/favicon-32x32.png' type='image/png' sizes="32*32">
     <link rel = 'stylesheet' href = "{% static 'styles.css'%} ">
     <link rel = 'stylesheet' media = 'screen and (max-width:678px)' href = "{% static 'mobile.css'%} ">
 
@@ -52,7 +52,7 @@
 
             <div style = 'border: 9px solid black;
                 border-radius: 5px;' class = 'col-sm-1'>
-                <div class="btn-group-vertical">
+                <div class="btn-group-vertical" style="text-align: center;">
                     <a href="{% url 'customerservice:index' %}" class="btn btn-primary">داشبورد</a>
                     <a href="{% url 'customerservice:contracts-list' %}" class="btn btn-primary">قراردادها</a>
                     <a href="{% url 'customerservice:customers-list' %}" class="btn btn-primary">مشترکین</a>

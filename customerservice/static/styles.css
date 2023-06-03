@@ -165,6 +165,11 @@ padding: 30px;
    border-radius: 15px
  }
 
+ .list_legend_output p{
+   display: inline;
+   vertical-align: middle;
+   font-size: 1.7vi;
+ }
  .row_form_field {
    padding: 10px;
  }

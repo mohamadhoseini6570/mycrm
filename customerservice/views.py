@@ -43,6 +43,7 @@ def session_test(request):
 # CBV dashboard for homepage by TempalteView---------------------------------------    
 class Index(generic.TemplateView):
     # login_url = '/accounts/login/'
+    # print(BASE_DIR)
     template_name = 'index.html'
     def get_context_data(self, **kwargs):
         user_ip = self.request.META['REMOTE_ADDR']
