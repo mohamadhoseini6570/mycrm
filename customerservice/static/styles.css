@@ -86,6 +86,7 @@
     color: rgb(96, 98, 151);
     padding: 5px 10px;
     font-size: x-large;
+    /* font-size: 1.9vi; */
     margin-bottom: 20px;
     margin-top: 20px;
     border-radius: 15px;
@@ -116,7 +117,7 @@
   .list_legend_output p{
     display: inline;
     vertical-align: middle;
-    font-size: 1.7vi;
+    font-size: 1.9vi;
   }
   .row_form_field {
     padding: 10px;
