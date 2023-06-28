@@ -224,7 +224,7 @@ header{
     background: #223144;
     width: 100%;
     box-sizing: border-box;
-    border-bottom: solid 3px rgb(79, 16, 24);
+    border-bottom: solid 3px #223144;
 }
 header .logo{
     color:#fff;
